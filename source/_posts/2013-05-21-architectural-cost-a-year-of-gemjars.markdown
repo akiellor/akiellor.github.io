@@ -47,7 +47,7 @@ The static design served from S3 seemed like a good way to solving the stability
 The request timeout issues became a non-issue as all the artifacts were built ahead of time, removing the latency to RubyGems. A nice side effect of the design is that as all gems are processed ahead of time, allowing for a compatibility page. A compatibility page should help greatly when diagnosing why a gem is unavailable.
 
 ## Conclusion
-Quantifying the cost of infrastructure is extremely valuable. Without measuring the cost of infrastructure it is impossible to decrease the cost in an informed way. Part of the value proposition of AWS and other infrastructure service providers is that your infrastructure cost is quantified in your monthly bill.
+{% raw %}<span id="conclusion">Quantifying</span>{% endraw %} the cost of infrastructure is extremely valuable. Without measuring the cost of infrastructure it is impossible to decrease the cost in an informed way. Part of the value proposition of AWS and other infrastructure service providers is that your infrastructure cost is quantified in your monthly bill.
 
 S3 has changed my default design for a public facing website. Typically I would have used some ruby server, sinatra, and haml. The ruby stack comes with two basic options for deployment: Heroku or Roll-Your-Own. Heroku is good to start, free, slow if your dyno stops, and faster if you pay. Roll your own is expensive to start, many tools make it easier, but you still have to at least think about, OS, instance size, chef/puppet, packaging, deployment... and the list goes on. There is a lot of knowledge required to do this well, and is an expensive way of serving HTML.
 
