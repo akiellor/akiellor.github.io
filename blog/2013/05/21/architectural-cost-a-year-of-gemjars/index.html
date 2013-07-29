@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Development Blog</title>
+  <title>Architectural Cost: A year of Gemjars. - Development Blog</title>
   <meta name="author" content="Andrew Kiellor">
 
   
-  <meta name="description" content="Tools Maven will be used to build this application, but
-the approach can be ported to Gradle trivially. Pry is an awesome RubyGem which gives a bit &hellip;">
+  <meta name="description" content="This post is an experience report of building, maintaining and rebuilding a internet service, Gemjars. It shows how the usage bills from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ the approach can be ported to Gradle trivially. Pry is an awesome RubyGem which 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiellor.github.io">
+  <link rel="canonical" href="http://akiellor.github.io/blog/2013/05/21/architectural-cost-a-year-of-gemjars">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Development Blog" type="application/atom+xml">
@@ -62,106 +61,12 @@ the approach can be ported to Gradle trivially. Pry is an awesome RubyGem which 
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/28/pry-jruby/">Build an Interative Prompt for Your Java Application.</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-28T23:58:00-07:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/28/pry-jruby/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Tools</h2>
-
-<p><a href="http://maven.apache.org">Maven</a> will be used to build this application, but
-the approach can be ported to <a href="http://gradle.org">Gradle</a> trivially.</p>
-
-<p><a href="http://pryrepl.org/">Pry</a> is an awesome RubyGem which gives a bit more polished IRB.</p>
-
-<p><a href="http://jruby.org">JRuby</a> allows you to use Pry as an interactive prompt for
-your java application.</p>
-
-<h2>The Code</h2>
-
-<p>For this exercise we will be using <a href="http://maven.apache.org">Maven</a> to build
-our application.</p>
-
-<p>Maven uses a pom.xml file to declare dependencies and additional build logic.
-Start with a basic pom.xml.</p>
-
-<script src="https://gist.github.com/akiellor/6102781.js?file=pom-empty.xml"></script>
-
-
-<p>Next some dependencies. It important to add the additional &lsquo;gemjars&rsquo; repository.
-The &lsquo;gemjars&rsquo; repository is a mirror of RubyGems, but is structured in a way that is suitable for use with Maven.</p>
-
-<script src="https://gist.github.com/akiellor/6102781.js?file=pom-dependencies.xml"></script>
-
-
-<p>We&rsquo;ll add configuration for the Maven java compiler and the maven-shade-plugin.
-The compiler configuration is provided to tell Maven to compile for version 1.6
-of java. The maven-shade-plugin is a way of packaging a java application into a
-&lsquo;fatjar&rsquo;.</p>
-
-<script src="https://gist.github.com/akiellor/6102781.js?file=pom-plugins.xml"></script>
-
-
-<p>A regular java main-class (<strong><em>src/main/java/com/example/pry/Main.java</em></strong>) is used
-to start JRuby and Pry.</p>
-
-<script src="https://gist.github.com/akiellor/6102781.js?file=Main.java"></script>
-
-
-<h2>Build</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ mvn clean package</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Run It</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -jar target/pry-0.0.1-SNAPSHOT-shaded.jar</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/21/architectural-cost-a-year-of-gemjars/">Architectural Cost: A Year of Gemjars.</a></h1>
+      <h1 class="entry-title">Architectural Cost: A Year of Gemjars.</h1>
     
     
       <p class="meta">
@@ -179,14 +84,14 @@ to start JRuby and Pry.</p>
 
 <time datetime="2013-05-21T09:15:00-07:00" pubdate data-updated="true">May 21<span>st</span>, 2013</time>
         
-         | <a href="/blog/2013/05/21/architectural-cost-a-year-of-gemjars/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>This post is an experience report of building, maintaining and rebuilding a internet service, <a href="http://gemjars.org">Gemjars</a>. It shows how the usage bills from Infrastructure Providers can be motivation for architectural cost reduction and improvement.</p>
+<div class="entry-content"><p>This post is an experience report of building, maintaining and rebuilding a internet service, <a href="http://gemjars.org">Gemjars</a>. It shows how the usage bills from Infrastructure Providers can be motivation for architectural cost reduction and improvement.</p>
 
 <h2>What is Gemjars?</h2>
 
@@ -248,18 +153,59 @@ to start JRuby and Pry.</p>
 
 <p>[1] for example: Maven, Ivy, Gradle, Buildr, leiningen</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Andrew Kiellor</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2013-05-21T09:15:00-07:00" pubdate data-updated="true">May 21<span>st</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiellor.github.io/blog/2013/05/21/architectural-cost-a-year-of-gemjars/" data-via="" data-counturl="http://akiellor.github.io/blog/2013/05/21/architectural-cost-a-year-of-gemjars/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/28/pry-jruby/" title="Next Post: Build an Interative Prompt for your Java application.">Build an Interative Prompt for your Java application. &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -284,6 +230,7 @@ to start JRuby and Pry.</p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -298,7 +245,10 @@ to start JRuby and Pry.</p>
       var disqus_shortname = 'blog-akiellor';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://akiellor.github.io/blog/2013/05/21/architectural-cost-a-year-of-gemjars/';
+        var disqus_url = 'http://akiellor.github.io/blog/2013/05/21/architectural-cost-a-year-of-gemjars/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
