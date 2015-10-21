@@ -2,6 +2,7 @@ OUTDIR=target
 SRCDIR=src
 POSTS_SOURCES := $(shell cd $(SRCDIR) && find posts -name '*.md')
 POSTS_OBJECTS := $(addprefix $(OUTDIR)/,$(POSTS_SOURCES:%.md=%.html))
+JS_SOURCES := $(shell find ${SRCDIR} -name '*.js')
 
 .prerequisites: package.json
 	npm install
@@ -18,4 +19,7 @@ ${OUTDIR}/posts/%.html: src/posts/%.md
 ${OUTDIR}/index.html: ${SRCDIR}/index.html
 	cp ${SRCDIR}/index.html ${OUTDIR}/index.html
 
-all: .prerequisites directories ${OUTDIR}/index.html ${POSTS_OBJECTS}
+${OUTDIR}/bundle.js: ${JS_SOURCES}
+	webpack ${SRCDIR}/main.js ${OUTDIR}/bundle.js
+
+all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/index.html ${POSTS_OBJECTS}
