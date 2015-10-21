@@ -20,6 +20,9 @@ ${OUTDIR}/index.html: ${SRCDIR}/index.html
 	cp ${SRCDIR}/index.html ${OUTDIR}/index.html
 
 ${OUTDIR}/bundle.js: ${JS_SOURCES}
-	webpack ${SRCDIR}/main.js ${OUTDIR}/bundle.js
+	webpack ${SRCDIR}/main.jsx ${OUTDIR}/bundle.js
 
 all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/index.html ${POSTS_OBJECTS}
+
+watch:
+	webpack --watch --devtool inline-source-map ${SRCDIR}/main.jsx ${OUTDIR}/bundle.js
