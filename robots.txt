@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://akiellor.github.io/sitemap.xml 
