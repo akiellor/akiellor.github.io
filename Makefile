@@ -26,3 +26,6 @@ all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/index.html ${POSTS
 
 run:
 	webpack-dev-server --port 8000 --content-base ${OUTDIR} --devtool inline-source-map ${SRCDIR}/main.jsx
+
+clean:
+	rm -rf ${OUTDIR}/*
