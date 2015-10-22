@@ -24,5 +24,5 @@ ${OUTDIR}/bundle.js: ${JS_SOURCES}
 
 all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/index.html ${POSTS_OBJECTS}
 
-watch:
-	webpack --watch --devtool inline-source-map ${SRCDIR}/main.jsx ${OUTDIR}/bundle.js
+run:
+	webpack-dev-server --port 8000 --content-base ${OUTDIR} --devtool inline-source-map ${SRCDIR}/main.jsx
