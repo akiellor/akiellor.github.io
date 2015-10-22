@@ -2,3 +2,6 @@
 	path = target
 	url = https://github.com/akiellor/akiellor.github.io
 	branch = master
+[submodule "Skeleton"]
+	path = Skeleton
+	url = https://github.com/dhg/Skeleton.git
