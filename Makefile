@@ -28,4 +28,4 @@ run:
 	webpack-dev-server --port 8000 --content-base ${OUTDIR} --devtool inline-source-map ${SRCDIR}/main.jsx
 
 clean:
-	rm -rf ${OUTDIR}/*
+	bash -c 'cd ${OUTDIR} && git reset HEAD --hard && git clean -xdf'
