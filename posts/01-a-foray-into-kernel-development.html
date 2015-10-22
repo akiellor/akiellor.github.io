@@ -1,0 +1,12 @@
+<h3 id="a-foray-into-kernel-development">A foray into Kernel Development</h3>
+<p>Off the back of a couple of discussions with colleages about unikernels and the tooling that is sprouting to support the idea, I decided to learn a little more about kernel development.</p>
+<p><a href="http://wiki.osdev.org/">OS Dev</a> provided a pretty good starting point with its <a href="http://wiki.osdev.org/Bare_Bones">Bare Bones</a> tutorial. This tutorial takes you through to having a working &#39;Hello World&#39; kernel. It mostly includes all the required code samples. The most difficult part of this tutorial was getting a gcc cross compiler working. OS Dev has a tutorial <a href="http://wiki.osdev.org/GCC_Cross-Compiler">GCC Cross Compiling</a>, but it was filled with manual steps and I struggled to get something working. Thankfully there had been some work to script the cross compilation by another tutorial <a href="http://preshing.com/20141119/how-to-build-a-gcc-cross-compiler">How to build a GCC Cross-Compiler</a>, the scripted solution worked almost unaltered.</p>
+<p>You can find the resulting kernel here <a href="http://github.com/akiellor/hello-kernel">Hello Kernel</a>.</p>
+<h5 id="learned-about">Learned about</h5>
+<ul>
+<li>the x86 architecture</li>
+<li>the multiboot specification for bootloaders</li>
+<li>a little assembly code (and that there are two dialects, AT&amp;T and intel)</li>
+<li>VGA and the framebuffer</li>
+<li>a little C</li>
+</ul>
