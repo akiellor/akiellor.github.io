@@ -2,6 +2,10 @@ import React from 'react';
 
 export default React.createClass({
   render: function(){
-    return <h1>An Awesome Blog</h1>
+    return (
+      <section className="header">
+        <h2 className="title">Development Digest</h2>
+      </section>
+    )
   }
 })

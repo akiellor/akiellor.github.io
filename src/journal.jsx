@@ -26,6 +26,6 @@ export default React.createClass({
     });
   },
   render: function(){
-    return <div><Header /><Posts posts={this.state.posts}/></div>
+    return <div className="container"><Header /><Posts posts={this.state.posts}/></div>
   }
 })

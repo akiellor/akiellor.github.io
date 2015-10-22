@@ -3,8 +3,8 @@ require('./main.scss');
 import $ from 'jquery';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Blog from './blog.jsx';
+import Journal from './journal.jsx';
 
 $(document).ready(function() {
-  ReactDOM.render(<Blog />, document.getElementById('content'));
+  ReactDOM.render(<Journal />, document.getElementById('content'));
 });
