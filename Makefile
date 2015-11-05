@@ -29,3 +29,10 @@ run:
 
 clean:
 	bash -c 'cd ${OUTDIR} && git reset HEAD --hard && git clean -xdf'
+
+publish:
+	make all
+	bash -c 'cd ${OUTDIR} && git commit -am "Publishing"'
+	git commit -am "Publishing"
+	git push origin master source
+
