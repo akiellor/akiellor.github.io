@@ -21260,10 +21260,6 @@
 	module.exports = {
 		"posts": [
 			{
-				"id": "01-a-foray-into-kernel-development",
-				"draft": true
-			},
-			{
 				"id": "02-javascript-copy-paste-detection",
 				"draft": true
 			}
