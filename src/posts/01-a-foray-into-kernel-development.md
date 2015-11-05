@@ -1,4 +1,4 @@
-### A foray into Kernel Development
+# A foray into Kernel Development
 
 Off the back of a couple of discussions with colleages about unikernels and the tooling that is sprouting to support the idea, I decided to learn a little more about kernel development.
 
@@ -6,12 +6,10 @@ Off the back of a couple of discussions with colleages about unikernels and the 
 
 You can find the resulting kernel here [Hello Kernel](http://github.com/akiellor/hello-kernel).
 
-##### Learned about
+## Learned about
 
 * the x86 architecture
 * the multiboot specification for bootloaders
 * a little assembly code (and that there are two dialects, AT&T and intel)
 * VGA and the framebuffer
 * a little C
-
- 

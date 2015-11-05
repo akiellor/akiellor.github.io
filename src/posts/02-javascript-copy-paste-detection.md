@@ -20,7 +20,7 @@ For example, the javascript source code:
 var i = 1;
 ```
 
-The [esprima](http://esprima.org) parser emits the following AST:
+The [esprima](http://esprima.org) parser emits the following ASThas the following output:
 
 ```
 {
@@ -51,7 +51,7 @@ The [esprima](http://esprima.org) parser emits the following AST:
 
 The AST copy paste detector will then walk from the leaves to the root, hashing the nodes of the tree.
 
-The following animation demonstrates a depth first traversal, hashing all attributes of each node with a **shasum**.
+The following animation demonstrates the depth first traversal, hashing all attributes of each node with a **shasum**.
 
 <pre class="asciimate">
 {
@@ -87,11 +87,11 @@ The following animation demonstrates a depth first traversal, hashing all attrib
       "declarations": [
         {
           "type": "VariableDeclarator",
-          "id": f646e41884435fd6c4fa02043d82dfb67169bdf3
+          "id": <em>f646e41884435fd6c4fa02043d82dfb67169bdf3</em>
 
 
 
-          "init": ee8a454ab4410b2a902755210874f2ad4dee54fb
+          "init": <em>ee8a454ab4410b2a902755210874f2ad4dee54fb</em>
 
 
 
@@ -110,7 +110,7 @@ The following animation demonstrates a depth first traversal, hashing all attrib
     {
       "type": "VariableDeclaration",
       "declarations": [
-        2b08c4d01e659390ef042ad52adbf0c2a02502e0
+        <em>2b08c4d01e659390ef042ad52adbf0c2a02502e0</em>
 
 
 
@@ -132,7 +132,7 @@ The following animation demonstrates a depth first traversal, hashing all attrib
 {
   "type": "Program",
   "body": [
-    804767351e5c475668d0bfaa913d4b7876ae0ecd
+    <em>804767351e5c475668d0bfaa913d4b7876ae0ecd</em>
 
 
 
@@ -154,7 +154,7 @@ The following animation demonstrates a depth first traversal, hashing all attrib
   "sourceType": "script"
 }
 -----
-d14802401406b46450b15d0a00a578060242a27a
+<em>d14802401406b46450b15d0a00a578060242a27a</em>
 
 
 
