@@ -21118,7 +21118,12 @@
 	  displayName: 'journal',
 
 	  getInitialState: function getInitialState() {
-	    return _modelJson2['default'];
+	    var allowDrafts = window.location.hash === "#drafts";
+	    return {
+	      posts: _modelJson2['default'].posts.filter(function (p) {
+	        return !p.draft || allowDrafts;
+	      })
+	    };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var self = this;
@@ -21174,7 +21179,7 @@
 	      _react2["default"].createElement(
 	        "h2",
 	        { className: "title" },
-	        "Development Digest"
+	        "> blog"
 	      )
 	    );
 	  }
@@ -21221,27 +21226,32 @@
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	exports['default'] = _react2['default'].createClass({
-	  displayName: 'post',
+	exports["default"] = _react2["default"].createClass({
+	  displayName: "post",
 
 	  render: function render() {
 	    var html = { __html: this.props.post.content };
-	    return _react2['default'].createElement('span', { dangerouslySetInnerHTML: html });
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement("div", { className: "post", dangerouslySetInnerHTML: html }),
+	      _react2["default"].createElement("hr", null)
+	    );
 	  }
 	});
-	module.exports = exports['default'];
+	module.exports = exports["default"];
 
 /***/ },
 /* 163 */
@@ -21250,10 +21260,12 @@
 	module.exports = {
 		"posts": [
 			{
-				"id": "01-a-foray-into-kernel-development"
+				"id": "01-a-foray-into-kernel-development",
+				"draft": true
 			},
 			{
-				"id": "02-javascript-copy-paste-detection"
+				"id": "02-javascript-copy-paste-detection",
+				"draft": true
 			}
 		]
 	};
@@ -21277,12 +21289,11 @@
 	var _jquery2 = _interopRequireDefault(_jquery);
 
 	function asciimate(dom) {
-	  var scene = (0, _jquery2['default'])(dom).text().split('-----\n');
+	  var scene = (0, _jquery2['default'])(dom).html().split('-----\n');
 	  var currentFrameIndex = 0;
 	  setInterval(function () {
-	    console.log(currentFrameIndex);
 	    var frame = scene[currentFrameIndex % scene.length];
-	    (0, _jquery2['default'])(dom).text(frame);
+	    (0, _jquery2['default'])(dom).html(frame);
 	    currentFrameIndex++;
 	  }, 1000);
 	}
@@ -21333,7 +21344,7 @@
 	exports.i(__webpack_require__(169), "");
 
 	// module
-	exports.push([module.id, ".container {\n  max-width: 800px; }\n", ""]);
+	exports.push([module.id, ".container {\n  margin-top: 100px;\n  max-width: 800px; }\n\n.header {\n  border-bottom: 1px solid black;\n  position: fixed;\n  top: 0;\n  max-width: 800px;\n  width: 100%;\n  background-color: white; }\n\n.post {\n  margin-top: 2rem; }\n  .post h1 {\n    font-size: 2.8rem; }\n  .post h2 {\n    font-size: 2.0rem; }\n\npre em {\n  color: red; }\n", ""]);
 
 	// exports
 

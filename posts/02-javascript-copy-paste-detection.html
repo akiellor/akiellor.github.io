@@ -8,7 +8,7 @@
 <p>A AST based CPD will instead parse the source code into a language specific AST (which a compiler would typically do as part of the compilation process) and finds duplications within the syntax tree.</p>
 <p>For example, the javascript source code:</p>
 <pre><code>var i = 1;
-</code></pre><p>The <a href="http://esprima.org">esprima</a> parser emits the following AST:</p>
+</code></pre><p>The <a href="http://esprima.org">esprima</a> parser emits the following ASThas the following output:</p>
 <pre><code>{
   &quot;type&quot;: &quot;Program&quot;,
   &quot;body&quot;: [
@@ -34,7 +34,7 @@
   &quot;sourceType&quot;: &quot;script&quot;
 }
 </code></pre><p>The AST copy paste detector will then walk from the leaves to the root, hashing the nodes of the tree.</p>
-<p>The following animation demonstrates a depth first traversal, hashing all attributes of each node with a <strong>shasum</strong>.</p>
+<p>The following animation demonstrates the depth first traversal, hashing all attributes of each node with a <strong>shasum</strong>.</p>
 <pre class="asciimate">
 {
   "type": "Program",
@@ -69,11 +69,11 @@
       "declarations": [
         {
           "type": "VariableDeclarator",
-          "id": f646e41884435fd6c4fa02043d82dfb67169bdf3
+          "id": <em>f646e41884435fd6c4fa02043d82dfb67169bdf3</em>
 
 
 
-          "init": ee8a454ab4410b2a902755210874f2ad4dee54fb
+          "init": <em>ee8a454ab4410b2a902755210874f2ad4dee54fb</em>
 
 
 
@@ -92,7 +92,7 @@
     {
       "type": "VariableDeclaration",
       "declarations": [
-        2b08c4d01e659390ef042ad52adbf0c2a02502e0
+        <em>2b08c4d01e659390ef042ad52adbf0c2a02502e0</em>
 
 
 
@@ -114,7 +114,7 @@
 {
   "type": "Program",
   "body": [
-    804767351e5c475668d0bfaa913d4b7876ae0ecd
+    <em>804767351e5c475668d0bfaa913d4b7876ae0ecd</em>
 
 
 
@@ -136,7 +136,7 @@
   "sourceType": "script"
 }
 -----
-d14802401406b46450b15d0a00a578060242a27a
+<em>d14802401406b46450b15d0a00a578060242a27a</em>
 
 
 
