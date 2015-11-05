@@ -20,7 +20,7 @@ For example, the javascript source code:
 var i = 1;
 ```
 
-The [esprima](http://esprima.org) parser emits the following ASThas the following output:
+The [esprima](http://esprima.org) parser emits the following AST:
 
 ```
 {
