@@ -1,1 +1,170 @@
-<h1 id="copy-paste-detection">Copy paste detection</h1>
+<h1 id="javascript-copy-paste-detection">JavaScript copy paste detection</h1>
+<p>A common problem in software development is keeping your software DRY (Don&#39;t Repeat Yourself). Tools have been around for a long time to detect where the code could be more DRY, these tools are lovingly called &#39;Copy Paste Detectors&#39;.</p>
+<p>They typically come in two flavours, line based and Abstract Syntax Tree (AST) based.</p>
+<h2 id="line-cpd">Line CPD</h2>
+<p>A line based copy paste detector is a language agnostic detector which essentially uses &#39;string searching algorithms&#39; to find duplicates.</p>
+<p>The <a href="http://pmd.github.io/">PMD</a> copy paste detector for example uses the <a href="https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm">Rabin–Karp algorithm</a> for finding duplicates. This in many cases works reasonably well, but is essentially just looking at the code as a sequence of characters rather than looking into the inherent structure of the language.</p>
+<h2 id="abstract-syntax-tree-cpd">Abstract Syntax Tree CPD</h2>
+<p>A AST based CPD will instead parse the source code into a language specific AST (which a compiler would typically do as part of the compilation process) and finds duplications within the syntax tree.</p>
+<p>For example, the javascript source code:</p>
+<pre><code>var i = 1;
+</code></pre><p>The <a href="http://esprima.org">esprima</a> parser emits the following AST:</p>
+<pre><code>{
+  &quot;type&quot;: &quot;Program&quot;,
+  &quot;body&quot;: [
+    {
+      &quot;type&quot;: &quot;VariableDeclaration&quot;,
+      &quot;declarations&quot;: [
+        {
+          &quot;type&quot;: &quot;VariableDeclarator&quot;,
+          &quot;id&quot;: {
+            &quot;type&quot;: &quot;Identifier&quot;,
+            &quot;name&quot;: &quot;i&quot;
+          },
+          &quot;init&quot;: {
+            &quot;type&quot;: &quot;Literal&quot;,
+            &quot;value&quot;: 1,
+            &quot;raw&quot;: &quot;1&quot;
+          }
+        }
+      ],
+      &quot;kind&quot;: &quot;var&quot;
+    }
+  ],
+  &quot;sourceType&quot;: &quot;script&quot;
+}
+</code></pre><p>The AST copy paste detector will then walk from the leaves to the root, hashing the nodes of the tree.</p>
+<p>The following animation demonstrates a depth first traversal, hashing all attributes of each node with a <strong>shasum</strong>.</p>
+<pre class="asciimate">
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "i"
+          },
+          "init": {
+            "type": "Literal",
+            "value": 1,
+            "raw": "1"
+          }
+        }
+      ],
+      "kind": "var"
+    }
+  ],
+  "sourceType": "script"
+}
+-----
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": f646e41884435fd6c4fa02043d82dfb67169bdf3
+
+
+
+          "init": ee8a454ab4410b2a902755210874f2ad4dee54fb
+
+
+
+
+        }
+      ],
+      "kind": "var"
+    }
+  ],
+  "sourceType": "script"
+}
+-----
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        2b08c4d01e659390ef042ad52adbf0c2a02502e0
+
+
+
+
+
+
+
+
+
+
+
+      ],
+      "kind": "var"
+    }
+  ],
+  "sourceType": "script"
+}
+-----
+{
+  "type": "Program",
+  "body": [
+    804767351e5c475668d0bfaa913d4b7876ae0ecd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ],
+  "sourceType": "script"
+}
+-----
+d14802401406b46450b15d0a00a578060242a27a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+
+<p>These tools will record both the hash of the AST node and the source location where that hash was encountered and create a report of incidents where duplicate hashes occur.</p>
+<p>This approach is more accurate in detecting duplications of code that does not have identical source, but is semantically the same. For example:</p>
+<pre><code class="lang-javascript">var a = 1;
+</code></pre>
+<pre><code class="lang-javascript">var a     =       1;
+</code></pre>
