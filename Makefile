@@ -35,5 +35,6 @@ publish:
 	make all
 	bash -c 'cd ${OUTDIR} && git diff -s --exit-code || git commit -am "Publishing"'
 	git diff -s --exit-code || git commit -am "Publishing"
-	git push origin master source
+	git push origin source
+	bash -c 'cd ${OUTDIR} && git push origin master'
 
