@@ -4,6 +4,8 @@ POSTS_SOURCES := $(shell cd $(SRCDIR) && find posts -name '*.md')
 POSTS_OBJECTS := $(addprefix $(OUTDIR)/,$(POSTS_SOURCES:%.md=%.html))
 JS_SOURCES := $(shell find ${SRCDIR} -name '*.js')
 
+.PHONY: ${OUTDIR}/bundle.js
+
 .prerequisites: package.json
 	npm install
 	touch .prerequisites
@@ -31,7 +33,7 @@ clean:
 	bash -c 'cd ${OUTDIR} && git reset HEAD --hard && git clean -xdf'
 
 publish:
-	bash -c 'git diff -s --exit-code || (echo "commit your work" && exit 1)'
+	bash -c 'git diff -s --ignore-submodules --exit-code || (echo "commit your work" && exit 1)'
 	make all
 	bash -c 'cd ${OUTDIR} && git diff -s --exit-code || git commit -am "Publishing"'
 	git diff -s --exit-code || git commit -am "Publishing"
