@@ -6,7 +6,10 @@ import model from './model.json';
 
 export default React.createClass({
   getInitialState: function() {
-    return model;
+    var allowDrafts = window.location.hash === "#drafts";
+    return {
+      posts: model.posts.filter(p => !p.draft || allowDrafts)
+    }
   },
   componentDidMount: function() {
     var self = this;
