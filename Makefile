@@ -31,8 +31,9 @@ clean:
 	bash -c 'cd ${OUTDIR} && git reset HEAD --hard && git clean -xdf'
 
 publish:
+	bash -c 'git diff -s --exit-code || (echo "commit your work" && exit 1)'
 	make all
-	bash -c 'cd ${OUTDIR} && git commit -am "Publishing"'
-	git commit -am "Publishing"
+	bash -c 'cd ${OUTDIR} && git diff -s --exit-code || git commit -am "Publishing"'
+	git diff -s --exit-code || git commit -am "Publishing"
 	git push origin master source
 
