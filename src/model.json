@@ -1,5 +1,6 @@
 {
   "posts": [
-    {"id": "01-a-foray-into-kernel-development", "title": "A foray into kernel development"}
+    {"id": "01-a-foray-into-kernel-development"},
+    {"id": "02-javascript-copy-paste-detection"}
   ]
 }
