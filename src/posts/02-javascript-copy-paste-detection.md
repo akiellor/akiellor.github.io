@@ -20,7 +20,7 @@ For example, the javascript source code:
 var i = 1;
 ```
 
-The [esprima](http://esprima.org) parser emits the following AST:
+The [Esprima](http://esprima.org) parser emits the following AST:
 
 ```
 {
@@ -51,7 +51,7 @@ The [esprima](http://esprima.org) parser emits the following AST:
 
 The AST copy paste detector will then walk from the leaves to the root, hashing the nodes of the tree.
 
-The following animation demonstrates the depth first traversal, hashing all attributes of each node with a **shasum**.
+The following animation demonstrates the depth first traversal, hashing all attributes of each node with a **SHA**.
 
 <pre class="asciimate">
 {

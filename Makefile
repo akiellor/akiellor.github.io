@@ -16,6 +16,7 @@ ${OUTDIR}/posts:
 	mkdir -p ${OUTDIR}/posts
 
 ${OUTDIR}/posts/%.html: src/posts/%.md
+	mdspell -n -r $<
 	marked -i $< -o $@
 
 ${OUTDIR}/index.html: ${SRCDIR}/index.html

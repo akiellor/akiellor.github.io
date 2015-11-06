@@ -1,0 +1,24 @@
+# markdown-spellcheck spelling configuration file
+# Format - lines beginning # are comments
+# global dictionary is at the start, file overrides afterwards
+# one word per line, to define a file override use ' - filename'
+# where filename is relative to this configuration file
+unikernels
+gcc
+multiboot
+framebuffer
+AST
+PMD
+Rabin
+javascript
+Esprima
+SHA
+ - src/posts/02-javascript-copy-paste-detection.md
+VariableDeclaration
+VariableDeclarator
+i
+init
+1
+sourceType
+2b08c4d01e659390ef042ad52adbf0c2a02502e0
+d14802401406b46450b15d0a00a578060242a27a
