@@ -28,6 +28,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "alex": "^1.4.0",
     "markdown-spellcheck": "^0.6.2"
   }
 }
