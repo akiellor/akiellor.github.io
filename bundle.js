@@ -21261,7 +21261,7 @@
 		"posts": [
 			{
 				"id": "02-javascript-copy-paste-detection",
-				"draft": true
+				"draft": false
 			}
 		]
 	};
