@@ -4,7 +4,7 @@ So I was working on a Copy Paste Detector and found that it would be useful for 
 
 With a bit of research, I found that there is a tool called [escodegen](https://github.com/estools/escodegen), that can take a JavaScript AST and print it as regular JavaScript string, so all I needed to do was have something that could generate some AST and the printing part would be sorted.
 
-The first pass at the generator was pretty basic. The first implementation of this was basically a giant switch statement where for each node type there was a definition of how to generate it, which may be written in terms of other generated node types. Example pseudo code:
+The first pass at the generator was pretty basic. The implementation of this was basically a giant switch statement where for each node type there was a definition of how to generate it, which may be written in terms of other generated node types. Example pseudo code:
 
 ```javascript
 function generate(nodeType) {
@@ -25,7 +25,7 @@ function generate(nodeType) {
 
 This approach was super tedious to implement, and resulted in many cases where node types would need to be grouped together. For above example generates a function declaration with no body statements, to fix this you need to have some idea of what the valid node types for that section of AST.
 
-Instead of rethinking, I pushed forward, extending the switch to have some categories:
+Instead of rethinking, I pushed forward, extending the switch to have some groups of things like Statements which would be randomly sampled from things considered to be Statements:
 
 ```javascript
 function generate(nodeType) {
