@@ -90,7 +90,7 @@ And in data form:
 }
 ```
 
-The generate function was refactored to take the desired node type and the model being used to generate from.
+**It is important to note that this model is not entirely complete, in that some elements are only valid at certain positions within a node array e.g. a ReturnStatement can only occur at the end of a FunctionDeclaration.body.**
 
 When generating FunctionDeclarations, this model creates things like:
 
@@ -110,9 +110,7 @@ function foo(foo) {
 }
 ```
 
-The new javascript generator was considerably smaller in size, because the logic of what nodes are allowed where was not embedded in the generator, but in the model. But these sample models are so boring, so the next step was to build an analyser to extract these models from existing code.
-
-**It is important to note that this model is not entirely complete, in that some elements are only valid at certain positions within a node array e.g. a ReturnStatement can only occur at the end of a FunctionDeclaration.body.**
+The generate function was refactored to take the desired node type and the model being used to generate from. The new javascript generator was considerably smaller in size, because the logic of what nodes are allowed where was not embedded in the generator, but in the model. But these sample models are so boring, so the next step was to build an analyser to extract these models from existing code.
 
 With the model roughly sketched out, the analyser would simply have to traverse some javascript code and count instances of node types at different properties with the exclusion of Literals and Identifiers which would need to collect the values.
 
