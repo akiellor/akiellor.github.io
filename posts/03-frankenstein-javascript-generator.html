@@ -1,1 +1,95 @@
 <h1 id="frankenstein-javascript-generator">Frankenstein JavaScript Generator</h1>
+<p>So I was working on a Copy Paste Detector and found that it would be useful for testing purposes to have a tool that could generate javascript.</p>
+<p>With a bit of research, I found that there is a tool called <a href="https://github.com/estools/escodegen">escodegen</a>, that can take a JavaScript AST and print it as regular JavaScript string, so all I needed to do was have something that could generate some AST and the printing part would be sorted.</p>
+<p>The first pass at the generator was pretty basic. The first implementation of this was basically a giant switch statement where for each node type there was a definition of how to generate it, which may be written in terms of other generated node types. Example pseudo code:</p>
+<pre><code class="lang-javascript">function generate(nodeType) {
+  switch (nodeType) {
+    case &quot;Identifier&quot;:
+      return {type: &quot;Identifier&quot;, name: &quot;foo&quot;}
+    case &quot;FunctionDeclaration&quot;:
+      return {
+        type: &quot;FunctionDeclaration&quot;,
+        id: generate(&quot;Identifier&quot;),
+        params: [],
+        body: []
+      };
+    ...
+  }
+}
+</code></pre>
+<p>This approach was super tedious to implement, and resulted in many cases where node types would need to be grouped together. For above example generates a function declaration with no body statements, to fix this you need to have some idea of what the valid node types for that section of AST.</p>
+<p>Instead of rethinking, I pushed forward, extending the switch to have some categories:</p>
+<pre><code class="lang-javascript">function generate(nodeType) {
+  switch (nodeType) {
+    case &quot;Identifier&quot;:
+      return {type: &quot;Identifier&quot;, name: &quot;foo&quot;}
+    case &quot;FunctionDeclaration&quot;:
+      return {
+        type: &quot;FunctionDeclaration&quot;,
+        id: generate(&quot;Identifier&quot;),
+        params: [],
+        body: [
+          generate(&quot;Statement&quot;)
+        ]
+      };
+    case &quot;Statement&quot;:
+      const type = sample([&quot;ExpressionStatement&quot;, &quot;FunctionDeclaration&quot;]);
+      return generate(type);
+    ...
+  }
+}
+</code></pre>
+<p>At the end, there was a <strong>working</strong> solution (if you ignore the stack-overflow errors). But we can do better...</p>
+<p>I had heard a bunch of people talk about Markov Chains and how they can be used to generate sequences of English text (similar to <a href="https://swiftkey.com/en">SwiftKey</a>), and that was about all I knew. But it seemed something Markov-y could help me.</p>
+<p>There was an example on the <a href="https://en.wikipedia.org/wiki/Markov_chain">Wikipedia</a> entry which described a creatures eating habits as the following rules:</p>
+<ul>
+<li>It eats exactly once a day.</li>
+<li>If it ate cheese today, tomorrow it will eat lettuce or grapes with equal probability.</li>
+<li>If it ate grapes today, tomorrow it will eat grapes with probability 1/10, cheese with probability 4/10 and lettuce with probability 5/10.</li>
+<li>If it ate lettuce today, tomorrow it will eat grapes with probability 4/10 or cheese with probability 6/10. It will not eat lettuce again tomorrow.</li>
+</ul>
+<p>Looks like if we replace food, with JavaScript AST node properties we are in business. So the first sample model looked something like:</p>
+<ul>
+<li>a FunctionDeclaration <code>id</code> is always an Identifier</li>
+<li>a FunctionDeclaration <code>params</code> is always an list of Identifier&#39;s</li>
+<li>a FunctionDeclaration <code>body</code> is 3/1 split between an ExpressionStatement and another FunctionDeclaration</li>
+<li>an ExpressionStatement always has an Identifier expression </li>
+<li>an Identifier always has a name of &quot;foo&quot;</li>
+</ul>
+<p>And in data form:</p>
+<pre><code>{
+  &quot;FunctionDeclaration.id&quot;: {
+    &quot;Identifier&quot;: 1
+  },
+  &quot;FunctionDeclaration.params[]&quot;: {
+    &quot;Identifier&quot;: 1
+  },
+  &quot;FunctionDeclaration.body[]&quot;: {
+    &quot;ExpressionStatement&quot;: 3,
+    &quot;FunctionDeclaration&quot;: 1
+  },
+  &quot;ExpressionStatement.expression&quot;: {
+    &quot;Identifier&quot;: 1
+  },
+  &quot;Identifier.name&quot;: {
+    &quot;foo&quot;: 1
+  }
+}
+</code></pre><p>The generate function was refactored to take the desired node type and the model being used to generate from.</p>
+<p>When generating FunctionDeclarations, this model creates things like:</p>
+<pre><code>function foo(foo) {
+ foo
+}
+</code></pre><p>OR</p>
+<pre><code>function foo(foo) {
+  function foo(foo) {
+    function foo(foo) {
+      foo
+    }
+  }
+}
+</code></pre><p>The new javascript generator was considerably smaller in size, because the logic of what nodes are allowed where was not embedded in the generator, but in the model. But these sample models are so boring, so the next step was to build an analyser to extract these models from existing code.</p>
+<p><strong>It is important to note that this model is not entirely complete, in that some elements are only valid at certain positions within a node array e.g. a ReturnStatement can only occur at the end of a FunctionDeclaration.body.</strong></p>
+<p>With the model roughly sketched out, the analyser would simply have to traverse some javascript code and count instances of node types at different properties with the exclusion of Literals and Identifiers which would need to collect the values.</p>
+<p>If you are interested in looking at the code that makes these things possible, feel free to have a look at <a href="https://github.com/akiellor/generate.js">generate.js</a>.</p>
+<p>If this post was interesting to you, you may want to have a look at the projects in the <a href="https://github.com/estools">estools</a> GitHub organization, particularly <a href="https://github.com/estools/esfuzz">esfuzz</a> which solves the javascript generation problem in a different way for a different purpose.</p>
