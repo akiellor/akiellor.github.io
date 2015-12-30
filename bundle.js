@@ -21260,12 +21260,12 @@
 	module.exports = {
 		"posts": [
 			{
-				"id": "02-javascript-copy-paste-detection",
-				"draft": false
-			},
-			{
 				"id": "03-frankenstein-javascript-generator",
 				"draft": true
+			},
+			{
+				"id": "02-javascript-copy-paste-detection",
+				"draft": false
 			}
 		]
 	};
