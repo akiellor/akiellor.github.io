@@ -13,9 +13,18 @@ Rabin
 javascript
 Esprima
 SHA
- - src/posts/02-javascript-copy-paste-detection.md
 VariableDeclaration
 VariableDeclarator
+ExpressionStatement
+FunctionDeclaration
+FunctionDeclarations
+FunctionDeclaration.body.
+estools
+SwiftKey
+escodegen
+generate.js
+esfuzz
+ReturnStatement
 i
 init
 1
