@@ -69,7 +69,7 @@ Looks like if we replace food, with JavaScript AST node properties we are in bus
 
 And in data form:
 
-```
+```json
 {
   "FunctionDeclaration.id": {
     "Identifier": 1
@@ -94,13 +94,13 @@ And in data form:
 
 When generating FunctionDeclarations, this model creates things like:
 
-```
+```javascript
 function foo(foo) {
  foo
 }
 ```
 OR
-```
+```javascript
 function foo(foo) {
   function foo(foo) {
     function foo(foo) {

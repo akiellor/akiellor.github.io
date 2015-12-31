@@ -1,3 +1,4 @@
+require('highlight.js/styles/github.css');
 require('./main.scss');
 
 import $ from 'jquery';

@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "alex": "^1.4.0",
+    "highlight.js": "^9.0.0",
+    "jquery": "^2.1.4",
     "markdown-spellcheck": "^0.6.2"
   }
 }
