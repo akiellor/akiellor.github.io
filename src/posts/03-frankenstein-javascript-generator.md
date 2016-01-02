@@ -2,7 +2,7 @@
 
 So I was working on a Copy Paste Detector and found that it would be useful for testing purposes to have a tool that could generate javascript.
 
-With a bit of research, I found that there is a tool called [escodegen](https://github.com/estools/escodegen), that can take a JavaScript AST and print it as regular JavaScript string, so all I needed to do was have something that could generate some AST and the printing part would be sorted.
+With a bit of research, I found that there is a tool called [escodegen](https://github.com/estools/escodegen), that can take a JavaScript AST and print it as regular JavaScript string. So all I needed to do was have something that could generate some AST and the printing part would be sorted.
 
 The first pass at the generator was pretty basic. The implementation of this was basically a giant switch statement where for each node type there was a definition of how to generate it, which may be written in terms of other generated node types. Example pseudo code:
 
