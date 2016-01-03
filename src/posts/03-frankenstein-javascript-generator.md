@@ -164,6 +164,14 @@ But you don't need to stop with statistics from one library, it is possible to a
 }));
 ```
 
+## Conclusion
+
+Getting to this solution was really fun. I was able to iteratively solve the original problem of randomly generating JavaScript and with every iteration I learned a little about JavaScript AST processing and Markov Chains.
+
+The statistical model still doesn't track many features of the analysed code, so can not be considered done. It could be interesting to have the analysis extract a model that would with certainty generate the original code, this would mean that all code features a being accounted.
+
+Another extension could be to use the statistical model to drive some IDE auto-completion. It would be great if IDE's were able to predict what code was coming next based on the code that has already been written.
+
 If you are interested in looking at the code that makes these things possible, feel free to have a look at [generate.js](https://github.com/akiellor/generate.js).
 
 If this post was interesting to you, you may want to have a look at the projects in the [estools](https://github.com/estools) GitHub organization, particularly [esfuzz](https://github.com/estools/esfuzz) which solves the javascript generation problem in a different way for a different purpose.
