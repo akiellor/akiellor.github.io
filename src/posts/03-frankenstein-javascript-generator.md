@@ -73,7 +73,7 @@ Looks like if we replace food with JavaScript AST node properties we are in busi
 
 And in data form:
 
-```json
+```javascript
 {
   "FunctionDeclaration.id": {
     "Identifier": 1

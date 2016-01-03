@@ -18,7 +18,7 @@ ${OUTDIR}/posts:
 ${OUTDIR}/posts/%.html: src/posts/%.md
 	mdspell -n -r $<
 	alex $<
-	marked -i $< -o $@
+	scripts/markdown $< > $@
 
 ${OUTDIR}/index.html: ${SRCDIR}/index.html
 	cp ${SRCDIR}/index.html ${OUTDIR}/index.html

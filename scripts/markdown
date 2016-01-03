@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var hljs = require('highlight.js');
+var file = process.argv[2];
+var content = require('fs').readFileSync(file).toString();
+
+var md = require('markdown-it')({
+  html: true,
+  linkify: true,
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+
+    try {
+      return hljs.highlightAuto(str).value;
+    } catch (__) {}
+
+    return ''; // use external default escaping
+  }
+});
+
+console.log(md.render(content));
