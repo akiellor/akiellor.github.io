@@ -168,7 +168,7 @@ But you don't need to stop with statistics from one library, it is possible to a
 
 Getting to this solution was really fun. I was able to iteratively solve the original problem of randomly generating JavaScript and with every iteration I learned a little about JavaScript AST processing and Markov Chains.
 
-The statistical model still doesn't track many features of the analysed code, so can not be considered done. It could be interesting to have the analysis extract a model that would with certainty generate the original code, this would mean that all code features a being accounted.
+The statistical model still doesn't track many features of the analysed code, so can not be considered done. It could be interesting to have the analysis pass extract a model that would with certainty generate the original code, this would mean that all code features a being accounted.
 
 Another extension could be to use the statistical model to drive some IDE auto-completion. It would be great if IDE's were able to predict what code was coming next based on the code that has already been written.
 
