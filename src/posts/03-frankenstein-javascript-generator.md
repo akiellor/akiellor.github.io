@@ -126,6 +126,8 @@ The library [falafel](https://github.com/substack/node-falafel) gives a nice API
 
 With the analyser and generator complete with a utility command line interface, it was possible to extract statistics from an existing library and generate new javascript from those statistics.
 
+The following uses the React library as a source for statistics and generates the following code.
+
 ```javascript
 // cat react.js | ./bin/analyse | ./bin/generate
 
