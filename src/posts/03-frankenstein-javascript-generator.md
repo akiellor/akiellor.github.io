@@ -63,7 +63,7 @@ There was an example on the [Wikipedia](https://en.wikipedia.org/wiki/Markov_cha
 * If it ate grapes today, tomorrow it will eat grapes with probability 1/10, cheese with probability 4/10 and lettuce with probability 5/10.
 * If it ate lettuce today, tomorrow it will eat grapes with probability 4/10 or cheese with probability 6/10. It will not eat lettuce again tomorrow.
 
-Looks like if we replace food, with JavaScript AST node properties we are in business. So the first sample model looked something like:
+Looks like if we replace food with JavaScript AST node properties we are in business. So the first sample model looked something like:
 
 * a FunctionDeclaration `id` is always an Identifier
 * a FunctionDeclaration `params` is always an list of Identifier's
