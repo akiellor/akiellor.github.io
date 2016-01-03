@@ -1,8 +1,10 @@
 # Frankenstein JavaScript Generator
 
-So I was working on a Copy Paste Detector and found that it would be useful for testing purposes to have a tool that could generate javascript.
+While implementing the Copy Paste Detector I wrote about in my last post, I realised it would be super useful to have a tool that could generate javascript.
 
-With a bit of research, I found that there is a tool called [escodegen](https://github.com/estools/escodegen), that can take a JavaScript AST and print it as regular JavaScript string. So all I needed to do was have something that could generate some AST and the printing part would be sorted.
+With a bit of research, I found that there is a tool called [escodegen](https://github.com/estools/escodegen), that takes a JavaScript AST and prints it as regular JavaScript string. So all I needed to do was have something that could generate some AST and the printing part would be sorted.
+
+## In the beginning
 
 The first pass at the generator was pretty basic. The implementation of this was basically a giant switch statement where for each node type there was a definition of how to generate it, which may be written in terms of other generated node types. Example pseudo code:
 
@@ -23,7 +25,7 @@ function generate(nodeType) {
 }
 ```
 
-This approach was super tedious to implement, and resulted in many cases where node types would need to be grouped together. For above example generates a function declaration with no body statements, to fix this you need to have some idea of what the valid node types for that section of AST.
+This approach was super tedious to implement, and resulted in many cases where node types would need to be grouped together. The above example generates a function declaration with no body statements, to fix this you need to have some idea of what the valid node types for that section of AST.
 
 Instead of rethinking, I pushed forward, extending the switch to have some groups of things like Statements which would be randomly sampled from things considered to be Statements:
 
@@ -50,6 +52,8 @@ function generate(nodeType) {
 ```
 
 At the end, there was a **working** solution (if you ignore the stack-overflow errors). But we can do better...
+
+## Round 2
 
 I had heard a bunch of people talk about Markov Chains and how they can be used to generate sequences of English text (similar to [SwiftKey](https://swiftkey.com/en)), and that was about all I knew. But it seemed something Markov-y could help me.
 
@@ -110,9 +114,55 @@ function foo(foo) {
 }
 ```
 
-The generate function was refactored to take the desired node type and the model being used to generate from. The new javascript generator was considerably smaller in size, because the logic of what nodes are allowed where was not embedded in the generator, but in the model. But these sample models are so boring, so the next step was to build an analyser to extract these models from existing code.
+The generate function was refactored to take the desired node type and the model being used to generate from. The new javascript generator was considerably smaller in size, because the logic of what nodes are allowed where was not embedded in the generator, but in the model. But this sample model is so boring, so the next step was to build a tool to create these models from existing code.
+
+## Beyond foo foo foo
 
 With the model roughly sketched out, the analyser would simply have to traverse some javascript code and count instances of node types at different properties with the exclusion of Literals and Identifiers which would need to collect the values.
+
+The library [falafel](https://github.com/substack/node-falafel) gives a nice API for traversing a JavaScript AST, this made it super easy to collect statistics from existing javascript code.
+
+## Putting it together
+
+With the analyser and generator complete with a utility command line interface, it was possible to extract statistics from an existing library and generate new javascript from those statistics.
+
+```javascript
+// cat react.js | ./bin/analyse | ./bin/generate
+
+(function (r) {
+    var ReactInstanceHandles = this._callbacks.getReactRootIDFromNodeID(30);
+}(function (styleName) {
+    var element = _dereq_(targetID);
+}));
+```
+
+But you don't need to stop with statistics from one library, it is possible to analyse multiple libraries and generate from the combined statistics.
+
+```javascript
+// cat angular.js react.js | ./bin/analyse | ./bin/generate
+
+(function e(window) {
+    function beginPhase(bookKeeping) {
+        if (map.keyCode === 'string') {
+            selectCtrl.retrievalMethod(this.selected);
+        } else {
+            if (offset) {
+                ReactElementValidator.push({ noValidate: 140 });
+            } else {
+                Array.expect(newIsolateScopeDirective);
+            }
+        }
+    }
+}(function valueWatchAction(module) {
+    for (key in listenerBank) {
+        if (!headers) {
+            Object.invoke(arg);
+        } else {
+            cachedState = true;
+        }
+    }
+}));
+```
 
 If you are interested in looking at the code that makes these things possible, feel free to have a look at [generate.js](https://github.com/akiellor/generate.js).
 
