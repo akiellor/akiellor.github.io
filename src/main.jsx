@@ -3,7 +3,8 @@ require('./main.scss');
 
 import $ from 'jquery';
 import Journal from './journal.jsx';
-import { install } from './asciimation.js';
+import Header from './header.jsx';
+import Post from './post.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
@@ -37,12 +38,25 @@ const DraftJournal = React.createClass({
 const App = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="container">
+        <Header />
         {this.props.children}
       </div>
     )
   }
 });
+
+ReactDOM.render((
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Journal} />
+        <Route path="drafts" component={DraftJournal} />
+        <Route path="post/:id" component={Post} />
+      </Route>
+    </Router>
+  </Provider>
+), document.getElementById('content'));
 
 function getPosts() {
   return $.get('./model.json').then((model) => {
@@ -53,7 +67,10 @@ function getPosts() {
         cache: false
       }).then(function(content) {
         post.content = content;
-        post.draft = $('<div>').html(content).find('meta[name="draft"]').attr('content') === 'true';
+        const node = $('<div>').html(content);
+        post.draft = node.find('meta[name="draft"]').attr('content') === 'true';
+        post.title = node.find('h1').text();
+        post.synopsis = node.find('p:first').text();
         return post;
       });
     })
@@ -61,20 +78,6 @@ function getPosts() {
   });
 }
 
-$(document).ready(function() {
-  install();
-  ReactDOM.render((
-    <Provider store={store}>
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Journal} />
-          <Route path="drafts" component={DraftJournal} />
-        </Route>
-      </Router>
-    </Provider>
-  ), document.getElementById('content'));
-
-  getPosts().then((posts) => {
-    store.dispatch({type: 'INITIALISE', posts: posts});
-  });
+getPosts().then((posts) => {
+  store.dispatch({type: 'INITIALISE', posts: posts});
 });

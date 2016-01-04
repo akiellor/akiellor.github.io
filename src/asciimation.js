@@ -9,11 +9,3 @@ export function asciimate(dom) {
     currentFrameIndex++
   }, 1000)
 }
-
-export function install() {
-  $(function() {
-    setTimeout(function() {
-      $('.asciimate').each((i,e) => asciimate(e));
-    }, 1000);
-  });
-}

@@ -1,11 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Post from './post.jsx';
 
 export default React.createClass({
   render: function(){
     const posts = this.props.posts.map(function(post) {
       return (
-        <Post key={post.id} post={post} />
+        <div key={post.id}>
+          <Link to={`post/${post.id}`} params={{ id: post.id }}><h1>{post.title}</h1></Link>
+          <p>{post.synopsis}</p>
+        </div>
       )
     });
     return (
