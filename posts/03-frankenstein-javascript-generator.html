@@ -1,6 +1,6 @@
 <meta name="draft" content="true">
 <h1>Frankenstein JavaScript Generator</h1>
-<p>While implementing the Copy Paste Detector I wrote about in my last post, I realised it would be super useful to have a tool that could generate javascript.</p>
+<p>While implementing the Copy Paste Detector I wrote about in my <a href="#/post/02-javascript-copy-paste-detection">last post</a>, I realised it would be super useful to have a tool that could generate javascript.</p>
 <p>With a bit of research, I found that there is a tool called <a href="https://github.com/estools/escodegen">escodegen</a>, that takes a JavaScript AST and prints it as regular JavaScript string. So all I needed to do was have something that could generate some AST and the printing part would be sorted.</p>
 <h2>In the beginning</h2>
 <p>The first pass at the generator was pretty basic. The implementation of this was basically a giant switch statement where for each node type there was a definition of how to generate it, which may be written in terms of other generated node types. Example pseudo code:</p>

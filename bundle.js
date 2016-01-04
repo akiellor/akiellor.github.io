@@ -22434,7 +22434,7 @@
 	          _reactRouter.Link,
 	          { to: 'post/' + post.id, params: { id: post.id } },
 	          _react2['default'].createElement(
-	            'h1',
+	            'h3',
 	            null,
 	            post.title
 	          )
@@ -27251,7 +27251,8 @@
 	  displayName: 'Post',
 
 	  componentDidMount: function componentDidMount() {
-	    (0, _jquery2['default'])('.asciimate', _reactDom2['default'].findDOMNode(this)).each(function (i, e) {
+	    var node = _reactDom2['default'].findDOMNode(this);
+	    (0, _jquery2['default'])('.asciimate', node).each(function (i, e) {
 	      (0, _asciimation.asciimate)(e);
 	    });
 	  },
