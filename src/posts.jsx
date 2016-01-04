@@ -7,7 +7,7 @@ export default React.createClass({
     const posts = this.props.posts.map(function(post) {
       return (
         <div key={post.id}>
-          <Link to={`post/${post.id}`} params={{ id: post.id }}><h1>{post.title}</h1></Link>
+          <Link to={`post/${post.id}`} params={{ id: post.id }}><h3>{post.title}</h3></Link>
           <p>{post.synopsis}</p>
         </div>
       )
