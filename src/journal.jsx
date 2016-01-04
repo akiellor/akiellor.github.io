@@ -3,14 +3,12 @@ import $ from 'jquery';
 import Header from './header.jsx';
 import Posts from './posts.jsx';
 
-const state = {
-  posts: [],
-  allowDrafts: false
-};
-
 export default React.createClass({
   getInitialState: function() {
-    return state;
+    return {
+      posts: [],
+      allowDrafts: false
+    }
   },
   render: function(){
     const posts = this.state.posts
