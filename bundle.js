@@ -21150,16 +21150,14 @@
 
 	var _postsJsx2 = _interopRequireDefault(_postsJsx);
 
-	var state = {
-	  posts: [],
-	  allowDrafts: false
-	};
-
 	exports['default'] = _react2['default'].createClass({
 	  displayName: 'journal',
 
 	  getInitialState: function getInitialState() {
-	    return state;
+	    return {
+	      posts: [],
+	      allowDrafts: false
+	    };
 	  },
 	  render: function render() {
 	    var _this = this;
