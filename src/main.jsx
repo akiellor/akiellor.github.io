@@ -33,4 +33,12 @@ $(document).ready(function() {
       return previousState;
     });
   });
+  function updateAllowDrafts() {
+    root.setState(function(previousState) {
+      previousState.allowDrafts = window.location.hash === '#drafts';
+      return previousState;
+    });
+  }
+  updateAllowDrafts();
+  setInterval(updateAllowDrafts, 50);
 });

@@ -5,7 +5,7 @@ import Posts from './posts.jsx';
 
 const state = {
   posts: [],
-  allowDrafts: window.location.hash === "#drafts"
+  allowDrafts: false
 };
 
 export default React.createClass({
