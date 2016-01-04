@@ -4,29 +4,30 @@ import Header from './header.jsx';
 import Posts from './posts.jsx';
 import model from './model.json';
 
+function getPosts() {
+  return $.get('./model.json').then((model) => {
+    const postPromises = model.posts.map((post) => {
+      return $.ajax({
+        url: `./posts/${post.id}.html`,
+        dataType: 'text',
+        cache: false
+      }).then(function(content) {
+        post.content = content;
+        return post;
+      });
+    })
+    return $.when(...postPromises).then((...args) => args);
+  });
+}
 export default React.createClass({
   getInitialState: function() {
     var allowDrafts = window.location.hash === "#drafts";
     return {
-      posts: model.posts.filter(p => !p.draft || allowDrafts)
+      posts: []
     }
   },
   componentDidMount: function() {
-    var self = this;
-    this.state.posts.forEach((post) => {
-      $.ajax({
-        url: `./posts/${post.id}.html`,
-        dataType: 'text',
-        cache: false,
-        success: (data) => {
-          post.content = data;
-          self.setState(self.state);
-        },
-        error: (xhr, status, err) => {
-          console.error(status, err.toString());
-        }
-      });
-    });
+    getPosts().then((posts) => this.setState({posts: posts}));
   },
   render: function(){
     return <div className="container"><Header /><Posts posts={this.state.posts}/></div>

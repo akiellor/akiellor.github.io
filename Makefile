@@ -23,10 +23,13 @@ ${OUTDIR}/posts/%.html: src/posts/%.md
 ${OUTDIR}/index.html: ${SRCDIR}/index.html
 	cp ${SRCDIR}/index.html ${OUTDIR}/index.html
 
+${OUTDIR}/model.json: ${SRCDIR}/model.json
+	cp ${SRCDIR}/model.json ${OUTDIR}/model.json
+
 ${OUTDIR}/bundle.js: ${JS_SOURCES}
 	webpack ${SRCDIR}/main.jsx ${OUTDIR}/bundle.js
 
-all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/index.html ${POSTS_OBJECTS}
+all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/model.json ${OUTDIR}/index.html ${POSTS_OBJECTS}
 
 run:
 	webpack-dev-server --port 8000 --content-base ${OUTDIR} --devtool inline-source-map ${SRCDIR}/main.jsx
