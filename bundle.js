@@ -103,6 +103,14 @@
 	      return previousState;
 	    });
 	  });
+	  function updateAllowDrafts() {
+	    root.setState(function (previousState) {
+	      previousState.allowDrafts = window.location.hash === '#drafts';
+	      return previousState;
+	    });
+	  }
+	  updateAllowDrafts();
+	  setInterval(updateAllowDrafts, 50);
 	});
 
 /***/ },
@@ -21144,7 +21152,7 @@
 
 	var state = {
 	  posts: [],
-	  allowDrafts: window.location.hash === "#drafts"
+	  allowDrafts: false
 	};
 
 	exports['default'] = _react2['default'].createClass({
