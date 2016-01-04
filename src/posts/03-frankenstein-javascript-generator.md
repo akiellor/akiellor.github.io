@@ -1,3 +1,5 @@
+<meta name="draft" content="true">
+
 # Frankenstein JavaScript Generator
 
 While implementing the Copy Paste Detector I wrote about in my last post, I realised it would be super useful to have a tool that could generate javascript.
