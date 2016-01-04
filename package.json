@@ -29,9 +29,13 @@
   "dependencies": {
     "alex": "^1.4.0",
     "highlight.js": "^9.0.0",
+    "history": "^1.17.0",
     "jquery": "^2.1.4",
     "markdown-it": "^5.0.2",
     "markdown-it-highlightjs": "^2.0.0",
-    "markdown-spellcheck": "^0.6.2"
+    "markdown-spellcheck": "^0.6.2",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.5",
+    "redux-simple-router": "^1.0.2"
   }
 }
