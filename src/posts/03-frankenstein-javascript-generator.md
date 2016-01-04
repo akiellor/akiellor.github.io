@@ -2,7 +2,7 @@
 
 # Frankenstein JavaScript Generator
 
-While implementing the Copy Paste Detector I wrote about in my last post, I realised it would be super useful to have a tool that could generate javascript.
+While implementing the Copy Paste Detector I wrote about in my [last post](#/post/02-javascript-copy-paste-detection), I realised it would be super useful to have a tool that could generate javascript.
 
 With a bit of research, I found that there is a tool called [escodegen](https://github.com/estools/escodegen), that takes a JavaScript AST and prints it as regular JavaScript string. So all I needed to do was have something that could generate some AST and the printing part would be sorted.
 

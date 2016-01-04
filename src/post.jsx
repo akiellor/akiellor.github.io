@@ -6,7 +6,8 @@ import $ from 'jquery';
 
 const Post = React.createClass({
   componentDidMount: function() {
-    $('.asciimate', ReactDOM.findDOMNode(this)).each((i, e) => {
+    const node = ReactDOM.findDOMNode(this);
+    $('.asciimate', node).each((i, e) => {
       asciimate(e);
     });
   },
