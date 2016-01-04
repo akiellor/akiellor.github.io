@@ -48,6 +48,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
 	var _jquery = __webpack_require__(1);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
@@ -64,14 +66,43 @@
 
 	var _journalJsx2 = _interopRequireDefault(_journalJsx);
 
-	var _asciimationJs = __webpack_require__(164);
+	var _asciimationJs = __webpack_require__(163);
 
-	__webpack_require__(165);
-	__webpack_require__(169);
+	__webpack_require__(164);
+	__webpack_require__(168);
+
+	function getPosts() {
+	  return _jquery2['default'].get('./model.json').then(function (model) {
+	    var postPromises = model.posts.map(function (post) {
+	      return _jquery2['default'].ajax({
+	        url: './posts/' + post.id + '.html',
+	        dataType: 'text',
+	        cache: false
+	      }).then(function (content) {
+	        post.content = content;
+	        post.draft = (0, _jquery2['default'])('<div>').html(content).find('meta[name="draft"]').attr('content') === 'true';
+	        return post;
+	      });
+	    });
+	    return _jquery2['default'].when.apply(_jquery2['default'], _toConsumableArray(postPromises)).then(function () {
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+
+	      return args;
+	    });
+	  });
+	}
 
 	(0, _jquery2['default'])(document).ready(function () {
 	  (0, _asciimationJs.install)();
-	  _reactDom2['default'].render(_react2['default'].createElement(_journalJsx2['default'], null), document.getElementById('content'));
+	  var root = _reactDom2['default'].render(_react2['default'].createElement(_journalJsx2['default'], null), document.getElementById('content'));
+	  getPosts().then(function (posts) {
+	    root.setState(function (previousState) {
+	      previousState.posts = posts;
+	      return previousState;
+	    });
+	  });
 	});
 
 /***/ },
@@ -21111,44 +21142,28 @@
 
 	var _postsJsx2 = _interopRequireDefault(_postsJsx);
 
-	var _modelJson = __webpack_require__(163);
-
-	var _modelJson2 = _interopRequireDefault(_modelJson);
+	var state = {
+	  posts: [],
+	  allowDrafts: window.location.hash === "#drafts"
+	};
 
 	exports['default'] = _react2['default'].createClass({
 	  displayName: 'journal',
 
 	  getInitialState: function getInitialState() {
-	    var allowDrafts = window.location.hash === "#drafts";
-	    return {
-	      posts: _modelJson2['default'].posts.filter(function (p) {
-	        return !p.draft || allowDrafts;
-	      })
-	    };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    var self = this;
-	    this.state.posts.forEach(function (post) {
-	      _jquery2['default'].ajax({
-	        url: './posts/' + post.id + '.html',
-	        dataType: 'text',
-	        cache: false,
-	        success: function success(data) {
-	          post.content = data;
-	          self.setState(self.state);
-	        },
-	        error: function error(xhr, status, err) {
-	          console.error(status, err.toString());
-	        }
-	      });
-	    });
+	    return state;
 	  },
 	  render: function render() {
+	    var _this = this;
+
+	    var posts = this.state.posts.filter(function (post) {
+	      return _this.state.allowDrafts || !post.draft;
+	    });
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'container' },
 	      _react2['default'].createElement(_headerJsx2['default'], null),
-	      _react2['default'].createElement(_postsJsx2['default'], { posts: this.state.posts })
+	      _react2['default'].createElement(_postsJsx2['default'], { posts: posts })
 	    );
 	  }
 	});
@@ -21256,23 +21271,6 @@
 
 /***/ },
 /* 163 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"posts": [
-			{
-				"id": "03-frankenstein-javascript-generator",
-				"draft": true
-			},
-			{
-				"id": "02-javascript-copy-paste-detection",
-				"draft": false
-			}
-		]
-	};
-
-/***/ },
-/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21310,16 +21308,16 @@
 	}
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(166);
+	var content = __webpack_require__(165);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(168)(content, {});
+	var update = __webpack_require__(167)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21336,10 +21334,10 @@
 	}
 
 /***/ },
-/* 166 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(167)();
+	exports = module.exports = __webpack_require__(166)();
 	// imports
 
 
@@ -21350,7 +21348,7 @@
 
 
 /***/ },
-/* 167 */
+/* 166 */
 /***/ function(module, exports) {
 
 	/*
@@ -21405,7 +21403,7 @@
 	};
 
 /***/ },
-/* 168 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -21659,16 +21657,16 @@
 
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(170);
+	var content = __webpack_require__(169);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(168)(content, {});
+	var update = __webpack_require__(167)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21685,13 +21683,13 @@
 	}
 
 /***/ },
-/* 170 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(167)();
+	exports = module.exports = __webpack_require__(166)();
 	// imports
+	exports.i(__webpack_require__(170), "");
 	exports.i(__webpack_require__(171), "");
-	exports.i(__webpack_require__(172), "");
 
 	// module
 	exports.push([module.id, ".container {\n  margin-top: 100px;\n  max-width: 800px; }\n\n.header {\n  border-bottom: 1px solid black;\n  position: fixed;\n  top: 0;\n  max-width: 800px;\n  width: 100%;\n  background-color: white; }\n\n.post {\n  margin-top: 2rem; }\n  .post h1 {\n    font-size: 2.8rem; }\n  .post h2 {\n    font-size: 2.0rem; }\n\npre em {\n  color: red; }\n", ""]);
@@ -21700,10 +21698,10 @@
 
 
 /***/ },
-/* 171 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(167)();
+	exports = module.exports = __webpack_require__(166)();
 	// imports
 
 
@@ -21714,10 +21712,10 @@
 
 
 /***/ },
-/* 172 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(167)();
+	exports = module.exports = __webpack_require__(166)();
 	// imports
 
 
