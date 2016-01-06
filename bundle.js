@@ -27346,9 +27346,17 @@
 
 	var _asciimation = __webpack_require__(231);
 
+	var _reduxSimpleRouter = __webpack_require__(232);
+
 	var _jquery = __webpack_require__(1);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function findPost(posts, id) {
+	  return posts.filter(function (post) {
+	    return post.id === id;
+	  })[0];
+	}
 
 	var Post = _react2['default'].createClass({
 	  displayName: 'Post',
@@ -27359,14 +27367,27 @@
 	      (0, _asciimation.asciimate)(e);
 	    });
 	  },
-	  render: function render() {
+	  componentWillUpdate: function componentWillUpdate() {
 	    var _props = this.props;
 	    var posts = _props.posts;
 	    var params = _props.params;
+	    var pushPath = _props.pushPath;
 
-	    var post = posts.filter(function (post) {
-	      return post.id === params.id;
-	    })[0];
+	    var post = findPost(posts, params.id);
+	    if (posts.length > 0 && !post) {
+	      pushPath('/');
+	    }
+	  },
+	  render: function render() {
+	    var _props2 = this.props;
+	    var posts = _props2.posts;
+	    var params = _props2.params;
+
+	    var post = findPost(posts, params.id);
+	    if (!post) {
+	      return _react2['default'].createElement('div', null);
+	    }
+
 	    var html = { __html: post.content };
 	    return _react2['default'].createElement(
 	      'div',
@@ -27379,7 +27400,7 @@
 
 	exports['default'] = (0, _reactRedux.connect)(function (state) {
 	  return { posts: state.posts };
-	}, {})(Post);
+	}, { pushPath: _reduxSimpleRouter.pushPath })(Post);
 	module.exports = exports['default'];
 
 /***/ },
