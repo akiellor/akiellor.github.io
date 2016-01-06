@@ -58,15 +58,15 @@
 
 	var _journalJsx2 = _interopRequireDefault(_journalJsx);
 
-	var _aboutJsx = __webpack_require__(230);
+	var _aboutJsx = __webpack_require__(227);
 
 	var _aboutJsx2 = _interopRequireDefault(_aboutJsx);
 
-	var _headerJsx = __webpack_require__(231);
+	var _headerJsx = __webpack_require__(228);
 
 	var _headerJsx2 = _interopRequireDefault(_headerJsx);
 
-	var _postJsx = __webpack_require__(227);
+	var _postJsx = __webpack_require__(229);
 
 	var _postJsx2 = _interopRequireDefault(_postJsx);
 
@@ -74,7 +74,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(228);
+	var _reactDom = __webpack_require__(230);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -22423,10 +22423,6 @@
 
 	var _reactRouter = __webpack_require__(178);
 
-	var _postJsx = __webpack_require__(227);
-
-	var _postJsx2 = _interopRequireDefault(_postJsx);
-
 	exports['default'] = _react2['default'].createClass({
 	  displayName: 'posts',
 
@@ -22436,11 +22432,11 @@
 	        'div',
 	        { key: post.id },
 	        _react2['default'].createElement(
-	          _reactRouter.Link,
-	          { to: 'post/' + post.id, params: { id: post.id } },
+	          'h1',
+	          { className: 'title' },
 	          _react2['default'].createElement(
-	            'h3',
-	            null,
+	            _reactRouter.Link,
+	            { to: 'post/' + post.id, params: { id: post.id } },
 	            post.title
 	          )
 	        ),
@@ -22452,8 +22448,8 @@
 	      );
 	    });
 	    return _react2['default'].createElement(
-	      'div',
-	      null,
+	      'section',
+	      { className: 'posts' },
 	      posts
 	    );
 	  }
@@ -27228,101 +27224,6 @@
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(228);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _reactRedux = __webpack_require__(159);
-
-	var _asciimation = __webpack_require__(229);
-
-	var _jquery = __webpack_require__(1);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	var Post = _react2['default'].createClass({
-	  displayName: 'Post',
-
-	  componentDidUpdate: function componentDidUpdate() {
-	    var node = _reactDom2['default'].findDOMNode(this);
-	    (0, _jquery2['default'])('.asciimate', node).each(function (i, e) {
-	      (0, _asciimation.asciimate)(e);
-	    });
-	  },
-	  render: function render() {
-	    var _props = this.props;
-	    var posts = _props.posts;
-	    var params = _props.params;
-
-	    var post = posts.filter(function (post) {
-	      return post.id === params.id;
-	    })[0];
-	    var html = { __html: post.content };
-	    return _react2['default'].createElement(
-	      'div',
-	      null,
-	      _react2['default'].createElement('div', { className: 'post', dangerouslySetInnerHTML: html }),
-	      _react2['default'].createElement('hr', null)
-	    );
-	  }
-	});
-
-	exports['default'] = (0, _reactRedux.connect)(function (state) {
-	  return { posts: state.posts };
-	}, {})(Post);
-	module.exports = exports['default'];
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = __webpack_require__(5);
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports.asciimate = asciimate;
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _jquery = __webpack_require__(1);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function asciimate(dom) {
-	  var scene = (0, _jquery2['default'])(dom).html().split('-----\n');
-	  var currentFrameIndex = 0;
-	  setInterval(function () {
-	    var frame = scene[currentFrameIndex % scene.length];
-	    (0, _jquery2['default'])(dom).html(frame);
-	    currentFrameIndex++;
-	  }, 1000);
-	}
-
-/***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -27373,7 +27274,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 231 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27420,6 +27321,101 @@
 	  }
 	});
 	module.exports = exports['default'];
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(230);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactRedux = __webpack_require__(159);
+
+	var _asciimation = __webpack_require__(231);
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var Post = _react2['default'].createClass({
+	  displayName: 'Post',
+
+	  componentDidUpdate: function componentDidUpdate() {
+	    var node = _reactDom2['default'].findDOMNode(this);
+	    (0, _jquery2['default'])('.asciimate', node).each(function (i, e) {
+	      (0, _asciimation.asciimate)(e);
+	    });
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var posts = _props.posts;
+	    var params = _props.params;
+
+	    var post = posts.filter(function (post) {
+	      return post.id === params.id;
+	    })[0];
+	    var html = { __html: post.content };
+	    return _react2['default'].createElement(
+	      'div',
+	      null,
+	      _react2['default'].createElement('div', { className: 'post', dangerouslySetInnerHTML: html }),
+	      _react2['default'].createElement('hr', null)
+	    );
+	  }
+	});
+
+	exports['default'] = (0, _reactRedux.connect)(function (state) {
+	  return { posts: state.posts };
+	}, {})(Post);
+	module.exports = exports['default'];
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(5);
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports.asciimate = asciimate;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function asciimate(dom) {
+	  var scene = (0, _jquery2['default'])(dom).html().split('-----\n');
+	  var currentFrameIndex = 0;
+	  setInterval(function () {
+	    var frame = scene[currentFrameIndex % scene.length];
+	    (0, _jquery2['default'])(dom).html(frame);
+	    currentFrameIndex++;
+	  }, 1000);
+	}
 
 /***/ },
 /* 232 */
@@ -28151,7 +28147,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Raleway);", ""]);
 
 	// module
-	exports.push([module.id, ".container {\n  max-width: 800px;\n}\n\n.header {\n  max-width: 800px;\n  width: 100%;\n  background-color: white;\n  margin-bottom: 2rem;\n  padding-top: 20px;\n}\n\n.header .title {\n  text-align: center;\n  margin-bottom: 1rem;\n}\n\n.header .links {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.header .links a {\n  padding: 0 1rem;\n}\n\n.about {\n  margin: auto;\n  max-width: 400px;\n  text-align: center;\n}\n\n.about .social {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.about .social a {\n  padding: 0 1rem;\n}\n\n.about .social .github {\n  background-image: url(" + __webpack_require__(244) + ");\n  background-size: 4rem 4rem;\n  background-repeat: no-repeat;\n  display: block;\n  width: 4rem;\n  height: 4rem;\n  text-indent: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.about .social .twitter {\n  width: 4rem;\n  height: 4rem;\n  display: block;\n  white-space: nowrap;\n  text-indent: 100%;\n  overflow: hidden;\n}\n\n.about .social .twitter:before {\n  background-image: url(" + __webpack_require__(245) + ");\n  background-size: 6.5rem 6.5rem;\n  background-repeat: no-repeat;\n  content: '';\n  position: absolute;\n  z-index: -1;\n  width: 5.5rem;\n  height: 5.5rem;\n  margin-left: -1rem;\n  margin-top: -1rem;\n  display: block;\n}\n\n.post {\n  margin-top: 2rem;\n}\n\n.post h1 {\n  font-size: 2.8rem;\n}\n\n.post h2 {\n  font-size: 2.0rem;\n}\n\npre em {\n  color: red;\n}", ""]);
+	exports.push([module.id, "h1 {\n  font-size: 2.8rem;\n}\n\nh2 {\n  font-size: 2.0rem;\n}\n\n.container {\n  max-width: 800px;\n}\n\n.header {\n  max-width: 800px;\n  width: 100%;\n  background-color: white;\n  margin-bottom: 2rem;\n  padding-top: 20px;\n}\n\n.header .title {\n  font-size: 3rem;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n\n.header .links {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.header .links a {\n  padding: 0 1rem;\n}\n\n.about {\n  margin: auto;\n  max-width: 400px;\n  text-align: center;\n}\n\n.about .social {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.about .social a {\n  padding: 0 1rem;\n}\n\n.about .social .github {\n  background-image: url(" + __webpack_require__(244) + ");\n  background-size: 4rem 4rem;\n  background-repeat: no-repeat;\n  display: block;\n  width: 4rem;\n  height: 4rem;\n  text-indent: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.about .social .twitter {\n  width: 4rem;\n  height: 4rem;\n  display: block;\n  white-space: nowrap;\n  text-indent: 100%;\n  overflow: hidden;\n}\n\n.about .social .twitter:before {\n  background-image: url(" + __webpack_require__(245) + ");\n  background-size: 6.5rem 6.5rem;\n  background-repeat: no-repeat;\n  content: '';\n  position: absolute;\n  z-index: -1;\n  width: 5.5rem;\n  height: 5.5rem;\n  margin-left: -1rem;\n  margin-top: -1rem;\n  display: block;\n}\n\n.posts .title {\n  margin-bottom: 0.3rem;\n}\n\n.posts .title a {\n  text-decoration: none;\n}\n\n.post {\n  margin-top: 2rem;\n}\n\npre em {\n  color: red;\n}", ""]);
 
 	// exports
 
