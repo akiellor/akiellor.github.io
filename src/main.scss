@@ -2,6 +2,14 @@
 @import "../Skeleton/css/skeleton.css";
 @import url(https://fonts.googleapis.com/css?family=Raleway);
 
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.0rem;
+}
+
 .container {
   max-width: 800px;
 }
@@ -14,6 +22,7 @@
   padding-top: 20px;
 
   .title {
+    font-size: 3rem;
     text-align: center;
     margin-bottom: 1rem;
   }
@@ -81,16 +90,18 @@
   }
 }
 
+.posts {
+  .title {
+    margin-bottom: 0.3rem;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
 .post {
   margin-top: 2rem;
-
-  h1 {
-    font-size: 2.8rem;
-  }
-
-  h2 {
-    font-size: 2.0rem;
-  }
 }
 
 pre {
