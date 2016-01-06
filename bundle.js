@@ -27250,7 +27250,7 @@
 	var Post = _react2['default'].createClass({
 	  displayName: 'Post',
 
-	  componentDidMount: function componentDidMount() {
+	  componentDidUpdate: function componentDidUpdate() {
 	    var node = _reactDom2['default'].findDOMNode(this);
 	    (0, _jquery2['default'])('.asciimate', node).each(function (i, e) {
 	      (0, _asciimation.asciimate)(e);
@@ -27318,34 +27318,45 @@
 /* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
+	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(3);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	exports["default"] = _react2["default"].createClass({
-	  displayName: "header",
+	var _reactRouter = __webpack_require__(178);
+
+	exports['default'] = _react2['default'].createClass({
+	  displayName: 'header',
 
 	  render: function render() {
-	    return _react2["default"].createElement(
-	      "section",
-	      { className: "header" },
-	      _react2["default"].createElement(
-	        "h2",
-	        { className: "title" },
-	        "> blog"
+	    return _react2['default'].createElement(
+	      'section',
+	      { className: 'header' },
+	      _react2['default'].createElement(
+	        'h2',
+	        { className: 'title' },
+	        '@akiellor'
+	      ),
+	      _react2['default'].createElement(
+	        'div',
+	        { className: 'links' },
+	        _react2['default'].createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          'Blog'
+	        )
 	      )
 	    );
 	  }
 	});
-	module.exports = exports["default"];
+	module.exports = exports['default'];
 
 /***/ },
 /* 231 */
@@ -28074,9 +28085,10 @@
 	// imports
 	exports.i(__webpack_require__(241), "");
 	exports.i(__webpack_require__(242), "");
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Raleway);", ""]);
 
 	// module
-	exports.push([module.id, ".container {\n  margin-top: 100px;\n  max-width: 800px; }\n\n.header {\n  border-bottom: 1px solid black;\n  position: fixed;\n  top: 0;\n  max-width: 800px;\n  width: 100%;\n  background-color: white; }\n\n.post {\n  margin-top: 2rem; }\n  .post h1 {\n    font-size: 2.8rem; }\n  .post h2 {\n    font-size: 2.0rem; }\n\npre em {\n  color: red; }\n", ""]);
+	exports.push([module.id, ".container {\n  max-width: 800px; }\n\n.header {\n  max-width: 800px;\n  width: 100%;\n  background-color: white;\n  margin-bottom: 2rem;\n  padding-top: 20px; }\n  .header .title {\n    text-align: center;\n    margin-bottom: 1rem; }\n  .header .links {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n\n.post {\n  margin-top: 2rem; }\n  .post h1 {\n    font-size: 2.8rem; }\n  .post h2 {\n    font-size: 2.0rem; }\n\npre em {\n  color: red; }\n", ""]);
 
 	// exports
 
