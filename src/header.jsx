@@ -5,7 +5,11 @@ export default React.createClass({
   render: function(){
     return (
       <section className="header">
-        <h2 className="title"><Link to="/">&gt; blog</Link></h2>
+        <h2 className="title">@akiellor</h2>
+
+        <div className="links">
+          <Link to="/">Blog</Link>
+        </div>
       </section>
     )
   }
