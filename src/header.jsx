@@ -9,6 +9,7 @@ export default React.createClass({
 
         <div className="links">
           <Link to="/">Blog</Link>
+          <Link to="/about">About</Link>
         </div>
       </section>
     )

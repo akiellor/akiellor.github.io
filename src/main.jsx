@@ -3,6 +3,7 @@ require('./main.scss');
 
 import $ from 'jquery';
 import Journal from './journal.jsx';
+import About from './about.jsx';
 import Header from './header.jsx';
 import Post from './post.jsx';
 import React from 'react';
@@ -53,6 +54,7 @@ ReactDOM.render((
         <IndexRoute component={Journal} />
         <Route path="drafts" component={DraftJournal} />
         <Route path="post/:id" component={Post} />
+        <Route path="about" component={About} />
       </Route>
     </Router>
   </Provider>

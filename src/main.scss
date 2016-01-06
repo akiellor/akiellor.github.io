@@ -22,6 +22,62 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    a {
+      padding: 0 1rem;
+    }
+  }
+}
+
+.about {
+  margin: auto;
+  max-width: 400px;
+  text-align: center;
+
+  .social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      padding: 0 1rem;
+    }
+
+    .github {
+      background-image: url(assets/github-mark.png);
+      background-size: 4rem 4rem;
+      background-repeat: no-repeat;
+
+      display: block;
+      width: 4rem;
+      height: 4rem;
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .twitter {
+      &:before {
+        background-image: url(assets/twitter-mark.png);
+        background-size: 6.5rem 6.5rem;
+        background-repeat: no-repeat;
+        content: '';
+        position: absolute;
+        z-index: -1;
+        width: 5.5rem;
+        height: 5.5rem;
+        margin-left: -1rem;
+        margin-top: -1rem;
+        display: block;
+      }
+
+      width: 4rem;
+      height: 4rem;
+      display: block;
+      white-space: nowrap;
+      text-indent: 100%;
+      overflow: hidden;
+    }
   }
 }
 
