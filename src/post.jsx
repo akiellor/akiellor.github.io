@@ -5,7 +5,7 @@ import { asciimate } from './asciimation';
 import $ from 'jquery';
 
 const Post = React.createClass({
-  componentDidMount: function() {
+  componentDidUpdate: function() {
     const node = ReactDOM.findDOMNode(this);
     $('.asciimate', node).each((i, e) => {
       asciimate(e);
