@@ -27249,7 +27249,7 @@
 	        "I am Software Developer currently working for ",
 	        _react2["default"].createElement(
 	          "a",
-	          { href: "thoughtworks.com" },
+	          { href: "https://thoughtworks.com" },
 	          "ThoughtWorks"
 	        ),
 	        "."
