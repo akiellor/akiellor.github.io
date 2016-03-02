@@ -1,3 +1,4 @@
+<meta name="tags" content="javascript,ast,analysis" />
 <h1>JavaScript copy paste detection</h1>
 <p>A common problem in software development is keeping your software DRY (Don’t Repeat Yourself). Tools have been around for a long time to detect where the code could be more DRY, these tools are lovingly called ‘Copy Paste Detectors’.</p>
 <p>They typically come in two flavours, line based and <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree</a> based.</p>
@@ -7,33 +8,33 @@
 <h2>Abstract Syntax Tree CPD</h2>
 <p>An Abstract Syntax Tree (AST) based CPD will instead parse the source code into a language specific AST (which a compiler would typically do as part of the compilation process) and finds duplications within the syntax tree.</p>
 <p>For example, the javascript source code:</p>
-<pre><code><span class="hljs-variable"><span class="hljs-keyword">var</span> i</span> = <span class="hljs-number">1</span>;
+<pre><code class="hljs"><span class="hljs-variable"><span class="hljs-keyword">var</span> i</span> = <span class="hljs-number">1</span>;
 </code></pre>
 <p>The <a href="http://esprima.org">Esprima</a> parser emits the following AST:</p>
-<pre><code>{
-  "<span class="hljs-attr">type</span>": <span class="hljs-string">"Program"</span>,
-  "<span class="hljs-attr">body</span>": [
+<pre><code class="hljs">{
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"Program"</span></span>,
+  "<span class="hljs-attribute">body</span>": <span class="hljs-value">[
     {
-      "<span class="hljs-attr">type</span>": <span class="hljs-string">"VariableDeclaration"</span>,
-      "<span class="hljs-attr">declarations</span>": [
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"VariableDeclaration"</span></span>,
+      "<span class="hljs-attribute">declarations</span>": <span class="hljs-value">[
         {
-          "<span class="hljs-attr">type</span>": <span class="hljs-string">"VariableDeclarator"</span>,
-          "<span class="hljs-attr">id</span>": {
-            "<span class="hljs-attr">type</span>": <span class="hljs-string">"Identifier"</span>,
-            "<span class="hljs-attr">name</span>": <span class="hljs-string">"i"</span>
-          },
-          "<span class="hljs-attr">init</span>": {
-            "<span class="hljs-attr">type</span>": <span class="hljs-string">"Literal"</span>,
-            "<span class="hljs-attr">value</span>": <span class="hljs-number">1</span>,
-            "<span class="hljs-attr">raw</span>": <span class="hljs-string">"1"</span>
-          }
-        }
-      ],
-      "<span class="hljs-attr">kind</span>": <span class="hljs-string">"var"</span>
-    }
-  ],
-  "<span class="hljs-attr">sourceType</span>": <span class="hljs-string">"script"</span>
-}
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"VariableDeclarator"</span></span>,
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"Identifier"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"i"</span>
+          </span>}</span>,
+          "<span class="hljs-attribute">init</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"Literal"</span></span>,
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+            "<span class="hljs-attribute">raw</span>": <span class="hljs-value"><span class="hljs-string">"1"</span>
+          </span>}
+        </span>}
+      ]</span>,
+      "<span class="hljs-attribute">kind</span>": <span class="hljs-value"><span class="hljs-string">"var"</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">sourceType</span>": <span class="hljs-value"><span class="hljs-string">"script"</span>
+</span>}
 </code></pre>
 <p>The AST copy paste detector will then walk from the leaves to the root, hashing the nodes of the tree. The hash of each node would typically be a hash of its own properties and the hash of any child nodes.</p>
 <p>The following animation demonstrates the depth first traversal, hashing all attributes of each node with a <strong>SHA</strong>.</p>
@@ -165,17 +166,17 @@
 </pre>
 <p>These tools will record both the hash of the AST node and the source location where that hash was encountered and create a report of incidents where duplicate hashes occur.</p>
 <p>This approach is more accurate in detecting duplications of code that does not have identical source, but is semantically the same. For example:</p>
-<pre><code class="language-javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;
 </code></pre>
-<pre><code class="language-javascript"><span class="hljs-keyword">var</span> a     =       <span class="hljs-number">1</span>;
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> a     =       <span class="hljs-number">1</span>;
 </code></pre>
 <p>Also, the AST approach can support <em>fuzzy</em> duplication checks, allowing a user to find duplications where the code is essentially the same but has some minor adjustments.</p>
 <p>This is achieved by introducing a hash function that will create <a href="https://en.wikipedia.org/wiki/Collision_(computer_science)">collisions</a> for content that is deemed similar. For example, if a hash function is created such that hashing any <em>Identifier</em> node results in the same hash value, then the following snippets would have identical hashes, and thus identified as a <em>duplicate</em>.</p>
-<pre><code class="language-javascript"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
   doThing(i);
 }
 </code></pre>
-<pre><code class="language-javascript"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
   doAnotherThing(i);
 }
 </code></pre>

@@ -160,6 +160,11 @@
 	        post.content = content;
 	        var node = (0, _jquery2['default'])('<div>').html(content);
 	        post.draft = node.find('meta[name="draft"]').attr('content') === 'true';
+	        post.tags = (node.find('meta[name="tags"]').attr('content') || "").split(',').map(function (t) {
+	          return t.trim();
+	        }).filter(function (t) {
+	          return t.length !== 0;
+	        });
 	        post.title = node.find('h1').text();
 	        post.synopsis = node.find('p:first').text();
 	        return post;
@@ -22423,11 +22428,40 @@
 
 	var _reactRouter = __webpack_require__(178);
 
+	function tagAsColor(title) {
+	  var colors = ['blue', 'green', 'yellow'];
+
+	  var index = title.split('').map(function (c) {
+	    return c.charCodeAt(0);
+	  }).reduce(function (m, i) {
+	    return m + i;
+	  }) % colors.length;
+
+	  return colors[index];
+	}
+
+	var Tag = _react2['default'].createClass({
+	  displayName: 'Tag',
+
+	  render: function render() {
+	    var title = this.props.title;
+	    var className = 'tag ' + tagAsColor(title);
+	    return _react2['default'].createElement(
+	      'span',
+	      { className: className },
+	      title
+	    );
+	  }
+	});
+
 	exports['default'] = _react2['default'].createClass({
 	  displayName: 'posts',
 
 	  render: function render() {
 	    var posts = this.props.posts.map(function (post) {
+	      var tags = post.tags.map(function (t) {
+	        return _react2['default'].createElement(Tag, { key: t, title: t });
+	      });
 	      return _react2['default'].createElement(
 	        'div',
 	        { key: post.id },
@@ -22444,7 +22478,8 @@
 	          'p',
 	          null,
 	          post.synopsis
-	        )
+	        ),
+	        tags
 	      );
 	    });
 	    return _react2['default'].createElement(
@@ -28168,7 +28203,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Raleway);", ""]);
 
 	// module
-	exports.push([module.id, "h1 {\n  font-size: 2.8rem;\n}\n\nh2 {\n  font-size: 2.0rem;\n}\n\n.container {\n  max-width: 800px;\n}\n\n.header {\n  max-width: 800px;\n  width: 100%;\n  background-color: white;\n  margin-bottom: 2rem;\n  padding-top: 20px;\n}\n\n.header .title {\n  font-size: 3rem;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n\n.header .links {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.header .links a {\n  padding: 0 1rem;\n}\n\n.about {\n  margin: auto;\n  max-width: 400px;\n  text-align: center;\n}\n\n.about .social {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.about .social a {\n  padding: 0 1rem;\n}\n\n.about .social .github {\n  background-image: url(" + __webpack_require__(244) + ");\n  background-size: 4rem 4rem;\n  background-repeat: no-repeat;\n  display: block;\n  width: 4rem;\n  height: 4rem;\n  text-indent: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.about .social .twitter {\n  width: 4rem;\n  height: 4rem;\n  display: block;\n  white-space: nowrap;\n  text-indent: 100%;\n  overflow: hidden;\n}\n\n.about .social .twitter:before {\n  background-image: url(" + __webpack_require__(245) + ");\n  background-size: 6.5rem 6.5rem;\n  background-repeat: no-repeat;\n  content: '';\n  position: absolute;\n  z-index: -1;\n  width: 5.5rem;\n  height: 5.5rem;\n  margin-left: -1rem;\n  margin-top: -1rem;\n  display: block;\n}\n\n.posts .title {\n  margin-bottom: 0.3rem;\n}\n\n.posts .title a {\n  text-decoration: none;\n}\n\n.post {\n  margin-top: 2rem;\n}\n\npre em {\n  color: red;\n}", ""]);
+	exports.push([module.id, "h1 {\n  font-size: 2.8rem;\n}\n\nh2 {\n  font-size: 2.0rem;\n}\n\n.container {\n  max-width: 800px;\n}\n\n.header {\n  max-width: 800px;\n  width: 100%;\n  background-color: white;\n  margin-bottom: 2rem;\n  padding-top: 20px;\n}\n\n.header .title {\n  font-size: 3rem;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n\n.header .links {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.header .links a {\n  padding: 0 1rem;\n}\n\n.about {\n  margin: auto;\n  max-width: 400px;\n  text-align: center;\n}\n\n.about .social {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.about .social a {\n  padding: 0 1rem;\n}\n\n.about .social .github {\n  background-image: url(" + __webpack_require__(244) + ");\n  background-size: 4rem 4rem;\n  background-repeat: no-repeat;\n  display: block;\n  width: 4rem;\n  height: 4rem;\n  text-indent: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.about .social .twitter {\n  width: 4rem;\n  height: 4rem;\n  display: block;\n  white-space: nowrap;\n  text-indent: 100%;\n  overflow: hidden;\n}\n\n.about .social .twitter:before {\n  background-image: url(" + __webpack_require__(245) + ");\n  background-size: 6.5rem 6.5rem;\n  background-repeat: no-repeat;\n  content: '';\n  position: absolute;\n  z-index: -1;\n  width: 5.5rem;\n  height: 5.5rem;\n  margin-left: -1rem;\n  margin-top: -1rem;\n  display: block;\n}\n\n.posts .title {\n  margin-bottom: 0.3rem;\n}\n\n.posts .title a {\n  text-decoration: none;\n}\n\n.posts div {\n  margin-bottom: 2rem;\n}\n\n.posts p {\n  margin-bottom: 1rem;\n}\n\n.post {\n  margin-top: 2rem;\n}\n\npre em {\n  color: red;\n}\n\n.tag {\n  padding: 5px;\n  margin-right: 5px;\n}\n\n.tag.yellow {\n  background-color: yellow;\n}\n\n.tag.green {\n  background-color: green;\n}\n\n.tag.blue {\n  background-color: blue;\n}", ""]);
 
 	// exports
 
