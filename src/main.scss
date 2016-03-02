@@ -98,6 +98,14 @@ h2 {
       text-decoration: none;
     }
   }
+
+  div {
+    margin-bottom: 2rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
 }
 
 .post {
@@ -109,3 +117,21 @@ pre {
     color: red;
   }
 }
+
+.tag {
+  padding: 5px;
+  margin-right: 5px;
+
+  &.yellow {
+    background-color: yellow;
+  }
+
+  &.green {
+    background-color: green;
+  }
+
+  &.blue {
+    background-color: blue;
+  }
+}
+

@@ -1,3 +1,5 @@
+<meta name="tags" content="javascript,ast,analysis" />
+
 # JavaScript copy paste detection
 
 A common problem in software development is keeping your software DRY (Don't Repeat Yourself). Tools have been around for a long time to detect where the code could be more DRY, these tools are lovingly called 'Copy Paste Detectors'.

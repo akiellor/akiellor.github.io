@@ -71,6 +71,11 @@ function getPosts() {
         post.content = content;
         const node = $('<div>').html(content);
         post.draft = node.find('meta[name="draft"]').attr('content') === 'true';
+        post.tags = (node.find('meta[name="tags"]').attr('content') || "").split(',').map(function(t) {
+          return t.trim();
+        }).filter(function(t) {
+          return t.length !== 0;
+        });
         post.title = node.find('h1').text();
         post.synopsis = node.find('p:first').text();
         return post;
