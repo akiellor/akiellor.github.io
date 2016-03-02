@@ -5,7 +5,7 @@ function tagAsColor(title) {
   const colors = [
     'blue',
     'green',
-    'yellow'
+    'orange'
   ];
 
   const index = title.split('')

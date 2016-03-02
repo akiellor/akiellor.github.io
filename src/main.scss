@@ -119,11 +119,13 @@ pre {
 }
 
 .tag {
-  padding: 5px;
+  font-size: 1.3rem;
+  color: white;
+  padding: 5px 10px;
   margin-right: 5px;
 
-  &.yellow {
-    background-color: yellow;
+  &.orange {
+    background-color: #FC6F33;
   }
 
   &.green {
