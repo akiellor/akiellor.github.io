@@ -70,7 +70,8 @@ function getPosts() {
       }).then(function(content) {
         post.content = content;
         const node = $('<div>').html(content);
-        post.draft = node.find('meta[name="draft"]').attr('content') === 'true';
+        post.published = node.find('meta[name="published"]').attr('content');
+        post.draft = !post.published;
         post.tags = (node.find('meta[name="tags"]').attr('content') || "").split(',').map(function(t) {
           return t.trim();
         }).filter(function(t) {
@@ -81,7 +82,18 @@ function getPosts() {
         return post;
       });
     })
-    return $.when(...postPromises).then((...args) => args);
+    return $.when(...postPromises).then((...args) => {
+      args.sort(function (a, b) {
+        if (a.published > b.published) {
+          return 1;
+        }
+        if (a.published < b.published) {
+          return -1;
+        }
+        return 0;
+      });
+      return args.reverse();
+    });
   });
 }
 

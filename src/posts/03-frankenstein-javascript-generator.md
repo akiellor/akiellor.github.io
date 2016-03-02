@@ -1,4 +1,5 @@
 <meta name="tags" content="javascript,ast" />
+<meta name="published" content="2016-01-04" />
 
 # Frankenstein JavaScript Generator
 

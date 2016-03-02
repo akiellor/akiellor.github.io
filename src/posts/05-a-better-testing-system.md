@@ -1,5 +1,3 @@
-<meta name="draft" content="true" />
-
 # A Better Test System
 
 After working on a number of projects I've observed a constant tension on the topic of *end to end tests* or *system tests*. This tension comes from:

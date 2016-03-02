@@ -1,4 +1,5 @@
 <meta name="tags" content="javascript,ast" />
+<meta name="published" content="2015-11-04" />
 
 # JavaScript copy paste detection
 
