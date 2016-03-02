@@ -159,7 +159,8 @@
 	      }).then(function (content) {
 	        post.content = content;
 	        var node = (0, _jquery2['default'])('<div>').html(content);
-	        post.draft = node.find('meta[name="draft"]').attr('content') === 'true';
+	        post.published = node.find('meta[name="published"]').attr('content');
+	        post.draft = !post.published;
 	        post.tags = (node.find('meta[name="tags"]').attr('content') || "").split(',').map(function (t) {
 	          return t.trim();
 	        }).filter(function (t) {
@@ -175,7 +176,16 @@
 	        args[_key] = arguments[_key];
 	      }
 
-	      return args;
+	      args.sort(function (a, b) {
+	        if (a.published > b.published) {
+	          return 1;
+	        }
+	        if (a.published < b.published) {
+	          return -1;
+	        }
+	        return 0;
+	      });
+	      return args.reverse();
 	    });
 	  });
 	}
