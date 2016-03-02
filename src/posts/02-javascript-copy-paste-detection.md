@@ -1,4 +1,4 @@
-<meta name="tags" content="javascript,ast,analysis" />
+<meta name="tags" content="javascript,ast" />
 
 # JavaScript copy paste detection
 
