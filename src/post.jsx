@@ -4,10 +4,38 @@ import { connect } from 'react-redux';
 import { asciimate } from './asciimation';
 import { pushPath } from 'redux-simple-router';
 import $ from 'jquery';
+import { Link } from 'react-router';
 
 function findPost(posts, id) {
   return posts.filter((post) => post.id === id)[0];
 }
+
+const Paging = React.createClass({
+  render: function() {
+    const posts = this.props.posts;
+    const post = this.props.current;
+
+    const published = posts.filter((p) => !p.draft);
+    const next = published[published.indexOf(post) - 1];
+    const prev = published[published.indexOf(post) + 1];
+
+    let nextLink = <div />;
+    if (next) {
+      nextLink = <Link to={`post/${next.id}`} params={{ id: next.id }}>{next.title}</Link>;
+    }
+    let prevLink = <div />;
+    if (prev) {
+      prevLink = <Link to={`post/${prev.id}`} params={{ id: prev.id }}>{prev.title}</Link>;
+    }
+
+    return (
+      <div className="paging">
+        <span className="previous">{prevLink}</span>
+        <span className="next">{nextLink}</span>
+      </div>
+    )
+  }
+});
 
 const Post = React.createClass({
   componentDidUpdate: function() {
@@ -26,16 +54,21 @@ const Post = React.createClass({
   },
   render: function() {
     const { posts, params } = this.props;
+
     const post = findPost(posts, params.id);
     if (!post) {
       return <div />
     }
 
     var html = { __html: post.content };
+
     return (
       <div>
+        <Paging posts={posts} current={post} />
+        <hr />
         <div className="post" dangerouslySetInnerHTML={html}></div>
         <hr />
+        <Paging posts={posts} current={post} />
       </div>
     )
   }

@@ -2,6 +2,10 @@
 @import "../Skeleton/css/skeleton.css";
 @import url(https://fonts.googleapis.com/css?family=Raleway);
 
+body {
+  padding-bottom: 3rem;
+}
+
 h1 {
   font-size: 2.8rem;
 }
@@ -137,3 +141,31 @@ pre {
   }
 }
 
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.paging {
+  span {
+    display: inline-block;
+    width: 50%;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .previous {
+    a:before {
+      content: "\00ab ";
+    }
+    text-align: left;
+  }
+
+  .next {
+    a:after {
+      content: " \00bb";
+    }
+    text-align: right;
+  }
+}
