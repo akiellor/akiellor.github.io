@@ -1,5 +1,6 @@
 {
   "posts": [
+    {"id": "08-building-a-router"},
     {"id": "05-a-better-testing-system"},
     {"id": "03-frankenstein-javascript-generator"},
     {"id": "02-javascript-copy-paste-detection"}
