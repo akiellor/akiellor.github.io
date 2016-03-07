@@ -84,10 +84,13 @@ function getPosts() {
     })
     return $.when(...postPromises).then((...args) => {
       args.sort(function (a, b) {
-        if (a.published > b.published) {
+        if (a.published === b.published) {
+          return 0;
+        }
+        if (b.published === undefined || a.published > b.published) {
           return 1;
         }
-        if (a.published < b.published) {
+        if (a.published === undefined || a.published < b.published) {
           return -1;
         }
         return 0;
