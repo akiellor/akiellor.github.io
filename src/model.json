@@ -1,5 +1,6 @@
 {
   "posts": [
+    {"id": "10-TIL-how-to-solder"},
     {"id": "08-building-a-router"},
     {"id": "05-a-better-testing-system"},
     {"id": "03-frankenstein-javascript-generator"},
