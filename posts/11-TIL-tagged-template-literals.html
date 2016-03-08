@@ -1,0 +1,34 @@
+<meta name="tags" content="til,javascript" />
+<meta name="published" content="2016-03-07" />
+<h1>Tagged Template Literals</h1>
+<p>Today I learned about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals">tagged template literals</a>, a neat new feature of ES6.</p>
+<p>Ordinary template literals are just like interpolation in many other languages.</p>
+<pre><code class="hljs language-scala"><span class="hljs-comment">// Scala</span>
+<span class="hljs-keyword">val</span> msg = <span class="hljs-string">"World"</span>
+println(s<span class="hljs-string">"Hello $msg"</span>)
+</code></pre>
+<pre><code class="hljs language-ruby"><span class="hljs-comment"># Ruby</span>
+msg = <span class="hljs-string">"World"</span>
+puts <span class="hljs-string">"Hello <span class="hljs-subst">#{world}</span>"</span>
+</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-comment">// JavaScript</span>
+<span class="hljs-keyword">const</span> msg = <span class="hljs-string">"World"</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Hello <span class="hljs-subst">${msg}</span>`</span>);
+</code></pre>
+<p>A tagged template literal is one where you prefix the template literal with a function identifier which will be used to perform the interpolation.</p>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">strings, ...values</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(strings); <span class="hljs-comment">// ["Hello ", ""]</span>
+  <span class="hljs-built_in">console</span>.log(values); <span class="hljs-comment">// ["World"}</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">"foo"</span>;
+}
+
+<span class="hljs-keyword">const</span> msg = <span class="hljs-string">"World"</span>;
+<span class="hljs-built_in">console</span>.log(foo<span class="hljs-string">`Hello <span class="hljs-subst">${msg}</span>`</span>); <span class="hljs-comment">// "foo"</span>
+</code></pre>
+<p>This feature allows for a bunch of really interesting options for how to get values into strings, the following links have some ideas:</p>
+<ul>
+<li><a href="https://github.com/dmnd/dedent">Dedenting multiline code</a></li>
+<li><a href="https://developers.google.com/web/updates/2015/01/ES6-Template-Strings?hl=en">Google Developers - a bunch of ideas at the end</a></li>
+<li><a href="https://leanpub.com/understandinges6/read/#leanpub-auto-tagged-templates">Understanding ECMAScript 6</a></li>
+</ul>
+
