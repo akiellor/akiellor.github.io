@@ -23,8 +23,8 @@ ${OUTDIR}/posts/%.html: src/posts/%.md
 ${OUTDIR}/index.html: ${SRCDIR}/index.html
 	cp ${SRCDIR}/index.html ${OUTDIR}/index.html
 
-${OUTDIR}/model.json: ${SRCDIR}/model.json
-	cp ${SRCDIR}/model.json ${OUTDIR}/model.json
+${OUTDIR}/model.json: ${POSTS_OBJECTS}
+	scripts/model ${POSTS_OBJECTS} > ${OUTDIR}/model.json
 
 ${OUTDIR}/bundle.js: ${JS_SOURCES}
 	webpack ${SRCDIR}/main.jsx ${OUTDIR}/bundle.js

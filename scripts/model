@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var basename = require('path').basename;
+
+var posts = process.argv.slice(2).map(function(p) {
+  return {id: basename(p, '.html')};
+});
+
+
+console.log(JSON.stringify({
+  posts: posts
+}));
