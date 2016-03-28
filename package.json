@@ -38,6 +38,7 @@
     "markdown-it-highlightjs": "^2.0.0",
     "markdown-spellcheck": "^0.6.2",
     "react-redux": "^4.0.6",
+    "react-router": "^2.0.1",
     "redux": "^3.0.5",
     "redux-simple-router": "^1.0.2"
   }
