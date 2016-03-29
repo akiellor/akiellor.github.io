@@ -13,7 +13,7 @@ NODE_BIN=node_modules/.bin
 	npm install
 	touch .prerequisites
 
-directories: ${OUTDIR}/posts
+directories: ${OUTDIR} ${OUTDIR}/posts
 
 ${OUTDIR}/posts:
 	mkdir -p ${OUTDIR}/posts
@@ -46,11 +46,12 @@ run:
 clean:
 	bash -c 'cd ${OUTDIR} && git reset HEAD --hard && git clean -xdf'
 
+${OUTDIR}:
+	git clone -b master $$(git config --get remote.origin.url) target
+
 publish:
 	bash -c 'git diff -s --ignore-submodules --exit-code || (echo "commit your work" && exit 1)'
 	make all
 	bash -c 'cd ${OUTDIR} && git add -A .; git commit --allow-empty -am "Publishing"'
-	git diff -s --exit-code || git commit -am "Publishing"
-	git push origin source
 	bash -c 'cd ${OUTDIR} && git push origin master'
 
