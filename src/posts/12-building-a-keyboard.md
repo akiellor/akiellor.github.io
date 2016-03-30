@@ -40,7 +40,9 @@ With the controller in, next up are the switches. The instructions recommended s
 
 At this point, with multiple attempts and some fiddling, I was able to load the [firmware](https://github.com/technomancy/atreus-firmware). I was pleasantly surprised to find that the firmware uses a pretty standard Arduino tool-chain and is implemented in C. When I get some more time I'll be sure to tinker with it some more.
 
-With the firmware loaded and the keyboard into my computer, I am able to test some keys! I found that one of the columns was not behaving, my heart sinks. I start thinking of all the parts I've soldered in that keys circuit and start getting really nervous at the thought of having to desolder a whole boatload of things. To debug this I checked all the diodes in the column and then tracked everything to the pins on the microcontroller, it all seemed fine. I double back to the switch and notice I missed one of the pins. Amateur mistake, but easily fixed.
+With the firmware loaded and the keyboard into my computer, I was able to test some keys. I found that one of the columns was not behaving, my heart sank. I started thinking of all the parts I had soldered in that keys circuit and started getting really nervous at the thought of having to desolder a whole boatload of things. To debug this I checked all the diodes in the column and then tracked everything to the pins on the microcontroller, it all seemed fine. I doubled back to the switch and noticed I had missed one of the pins. It was an amateur mistake, but easily fixed.
+
+![Unboxed](./posts/12-building-a-keyboard/01-unboxed.jpg)
 
 Now the board passes the preliminary checks, I put in the rest of the switches.
 
@@ -54,6 +56,6 @@ The last few steps of screwing the keyboard case together and pressing on the ke
 
 This project taught me a lot about electronics especially soldering and microcontroller firmware, but more importantly it has given me a lot more confidence to try some more hardware projects.
 
-It is all stuff that can be learned!
+It is all stuff that can be learned.
 
 ![Complete](./posts/12-building-a-keyboard/06-complete.jpg)

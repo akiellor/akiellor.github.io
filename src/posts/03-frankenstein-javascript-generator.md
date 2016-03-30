@@ -141,7 +141,7 @@ The following uses the React library as a source for statistics and generates th
 }));
 ```
 
-But you don't need to stop with statistics from one library, it is possible to analyse multiple libraries and generate from the combined statistics.
+You don't need to stop with statistics from one library, it is possible to analyse multiple libraries and generate from the combined statistics.
 
 ```javascript
 // cat angular.js react.js | ./bin/analyse | ./bin/generate

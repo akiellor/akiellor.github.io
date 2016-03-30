@@ -213,7 +213,7 @@ for(let i = 0; i < 5; i++) {
 
 This approach is described further in the paper [Clone Detection Using Abstract Syntax Trees][clone-detection-paper].
 
-If folks are interested in an implementation of this approach for JavaScript, feel free to have a look at [patterns.js][patterns-github]. Feedback on this project or this post is very welcome.
+If folks are interested in an implementation of this approach for JavaScript, feel free to have a look at [patterns.js][patterns-github]. Feedback on this project or this post is welcome.
 
 
 [patterns-github]: https://github.com/akiellor/patterns.js

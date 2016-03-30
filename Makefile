@@ -43,6 +43,9 @@ all: .prerequisites directories ${OUTDIR}/bundle.js ${OUTDIR}/model.json ${OUTDI
 run:
 	${NODE_BIN}/webpack-dev-server --port 8000 --content-base ${OUTDIR} --devtool inline-source-map ${SRCDIR}/main.jsx
 
+lint:
+	docker run -v $$(pwd):/data -ti proselint sh -c 'cd /data/src; proselint ${POSTS_SOURCES}'
+
 clean:
 	bash -c 'cd ${OUTDIR} && git reset HEAD --hard && git clean -xdf'
 

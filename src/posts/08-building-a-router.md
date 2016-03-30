@@ -2,7 +2,7 @@
 
 # Building a router
 
-I've been thinking about building a wifi extension device for my apartment because the wifi doesn't quite get from one end to the other. I really have very little to no networking knowledge so wanted to dig into how routing actually works before hand.
+I've been thinking about building a wifi extension device for my apartment because the wifi doesn't quite get from one end to the other. I really have little to no networking knowledge so wanted to dig into how routing actually works before hand.
 
 This blog will go into how I experimented with VirtualBox to build a virtual router to bridge between two networks.
 
