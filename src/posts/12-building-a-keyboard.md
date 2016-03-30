@@ -42,8 +42,6 @@ At this point, with multiple attempts and some fiddling, I was able to load the 
 
 With the firmware loaded and the keyboard into my computer, I was able to test some keys. I found that one of the columns was not behaving, my heart sank. I started thinking of all the parts I had soldered in that keys circuit and started getting really nervous at the thought of having to desolder a whole boatload of things. To debug this I checked all the diodes in the column and then tracked everything to the pins on the microcontroller, it all seemed fine. I doubled back to the switch and noticed I had missed one of the pins. It was an amateur mistake, but easily fixed.
 
-![Unboxed](./posts/12-building-a-keyboard/01-unboxed.jpg)
-
 Now the board passes the preliminary checks, I put in the rest of the switches.
 
 ![All Switches](./posts/12-building-a-keyboard/05-all-switches.jpg)
