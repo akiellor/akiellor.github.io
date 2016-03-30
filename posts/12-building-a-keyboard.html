@@ -22,13 +22,14 @@
 <p>With the controller in, next up are the switches. The instructions recommended starting with the corner four switches, then the lowest row and the right most column. With a complete row and column it is possible to debug all the pins connected to the controller.</p>
 <p><img src="./posts/12-building-a-keyboard/04-debug-switches.jpg" alt="Debug Switches"></p>
 <p>At this point, with multiple attempts and some fiddling, I was able to load the <a href="https://github.com/technomancy/atreus-firmware">firmware</a>. I was pleasantly surprised to find that the firmware uses a pretty standard Arduino tool-chain and is implemented in C. When I get some more time I’ll be sure to tinker with it some more.</p>
-<p>With the firmware loaded and the keyboard into my computer, I am able to test some keys! I found that one of the columns was not behaving, my heart sinks. I start thinking of all the parts I’ve soldered in that keys circuit and start getting really nervous at the thought of having to desolder a whole boatload of things. To debug this I checked all the diodes in the column and then tracked everything to the pins on the microcontroller, it all seemed fine. I double back to the switch and notice I missed one of the pins. Amateur mistake, but easily fixed.</p>
+<p>With the firmware loaded and the keyboard into my computer, I was able to test some keys. I found that one of the columns was not behaving, my heart sank. I started thinking of all the parts I had soldered in that keys circuit and started getting really nervous at the thought of having to desolder a whole boatload of things. To debug this I checked all the diodes in the column and then tracked everything to the pins on the microcontroller, it all seemed fine. I doubled back to the switch and noticed I had missed one of the pins. It was an amateur mistake, but easily fixed.</p>
+<p><img src="./posts/12-building-a-keyboard/01-unboxed.jpg" alt="Unboxed"></p>
 <p>Now the board passes the preliminary checks, I put in the rest of the switches.</p>
 <p><img src="./posts/12-building-a-keyboard/05-all-switches.jpg" alt="All Switches"></p>
 <h2>Finishing Touches</h2>
 <p>The last few steps of screwing the keyboard case together and pressing on the keycaps were all pretty trivial, although I did find I had to apply more force than I expected to get the keycaps on.</p>
 <h2>Complete</h2>
 <p>This project taught me a lot about electronics especially soldering and microcontroller firmware, but more importantly it has given me a lot more confidence to try some more hardware projects.</p>
-<p>It is all stuff that can be learned!</p>
+<p>It is all stuff that can be learned.</p>
 <p><img src="./posts/12-building-a-keyboard/06-complete.jpg" alt="Complete"></p>
 
