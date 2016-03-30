@@ -1,35 +1,35 @@
 <meta name="tags" content="electronics" />
 <meta name="published" content="2016-03-30" />
 <h1>Building a keyboard</h1>
-<p>I’ve been wanting to get into building a physical hardware something. A keyboard seemed like a pretty good place to start.</p>
+<p>I’ve been wanting to get into building some physical hardware. A keyboard seemed like a pretty good place to start.</p>
 <p>I started searching the internet for people that have done such a thing, and it turns out there are a lot and people have done it different ways.</p>
 <ul>
 <li>Complete DIY - <a href="http://www.davecooper.org/blog/2014/10/15/i-built-a-keyboard/">My First Keyboard Build</a></li>
 <li>In days gone by there were <a href="https://geekhack.org/index.php?topic=23572.0">Group Buys</a></li>
 <li>And kits like <a href="https://www.massdrop.com/buy/ergodox">ErgoDox</a> and <a href="http://atreus.technomancy.us">Atreus</a></li>
 </ul>
-<p>I started down the complete DIY path, and found some good suppliers for parts. But it was turning out to be a lot of work in something that I was confident would work at the end. So instead I went for the <a href="http://atreus.technomancy.us">Atreus</a> kit.</p>
+<p>I started down the complete DIY path, and found some good suppliers for parts, but it was turning out to be a lot of work and I was not confident it would work at the end. So instead I went for the <a href="http://atreus.technomancy.us">Atreus</a> kit.</p>
 <p>The website has an ordering form and I received a personal email from <a href="https://twitter.com/technomancy">@technomancy</a> giving some options for payment. I paid and within a week or so I received the kit.</p>
 <h2>Unboxing</h2>
-<p>The kit includes all the parts required to build the keyboard as well as the instructions. Definitely read the instructions, they were super helpful and went to the level of complete beginner by explaining things step by step. Which is great for someone who is <a href="https://thesciencedog.files.wordpress.com/2013/09/golden-retriever-and-science1.jpg">science dogging</a> it.</p>
+<p>The kit includes all the parts required to build the keyboard as well as the instructions. The instructions proved useful and went to the level of complete beginner by explaining things step by step, which was great for someone who is <a href="https://thesciencedog.files.wordpress.com/2013/09/golden-retriever-and-science1.jpg">science dogging</a> it.</p>
 <p><img src="./posts/12-building-a-keyboard/01-unboxed.jpg" alt="Unboxed"></p>
 <h2>Diodes</h2>
 <p>Since I had decided not to apply the finish to the keyboard, I jumped straight into soldering the diodes. This was the first time I had ever soldered something, so this was nerve-racking. The instructions did include some good links to soldering tutorials which did give some confidence.</p>
 <p><img src="./posts/12-building-a-keyboard/02-first-diodes.jpg" alt="First Diodes"></p>
 <h2>Microcontroller</h2>
-<p>The Atreus Keyboard uses a A-Star microcontroller to handle all the switch signals. Soldering it to the board was a little more tricky than the diodes as the contact points were much closer together and any slag could at best make the keyboard behave unpredictably and at worst be completely broken. I took a lot of time here, but maybe should not have, as I ended up scorching the microcontroller in a few places.</p>
+<p>The Atreus Keyboard uses a A-Star microcontroller to handle all the switch signals. Soldering it to the board was a little more tricky than the diodes as the contact points were much closer together and any slag could break the keyboard or make it behave unpredictably. I took a lot of time here, but maybe should not have, as I ended up scorching the microcontroller in a few places.</p>
 <p><img src="./posts/12-building-a-keyboard/03-microcontroller.jpg" alt="Microcontroller"></p>
 <h2>Switches</h2>
-<p>With the controller in, next up are the switches. The instructions recommended starting with the corner four switches, then the lowest row and the right most column. With a complete row and column it is possible to debug all the pins connected to the controller.</p>
+<p>With the controller in, the switches were next. The instructions recommended starting with the corner four switches, then the lowest row and the right most column. With a complete row and column it is possible to debug all the pins connected to the controller.</p>
 <p><img src="./posts/12-building-a-keyboard/04-debug-switches.jpg" alt="Debug Switches"></p>
-<p>At this point, with multiple attempts and some fiddling, I was able to load the <a href="https://github.com/technomancy/atreus-firmware">firmware</a>. I was pleasantly surprised to find that the firmware uses a pretty standard Arduino tool-chain and is implemented in C. When I get some more time I’ll be sure to tinker with it some more.</p>
+<p>At this point, with some fiddling, I was able to load the <a href="https://github.com/technomancy/atreus-firmware">firmware</a>. I was pleasantly surprised to find that the firmware uses a pretty standard Arduino tool-chain and is implemented in C. When I get some more time I’ll be sure to tinker with it some more.</p>
 <p>With the firmware loaded and the keyboard into my computer, I was able to test some keys. I found that one of the columns was not behaving, my heart sank. I started thinking of all the parts I had soldered in that keys circuit and started getting really nervous at the thought of having to desolder a whole boatload of things. To debug this I checked all the diodes in the column and then tracked everything to the pins on the microcontroller, it all seemed fine. I doubled back to the switch and noticed I had missed one of the pins. It was an amateur mistake, but easily fixed.</p>
-<p>Now the board passes the preliminary checks, I put in the rest of the switches.</p>
+<p>The board passed the preliminary checks, so I put in the rest of the switches.</p>
 <p><img src="./posts/12-building-a-keyboard/05-all-switches.jpg" alt="All Switches"></p>
 <h2>Finishing Touches</h2>
 <p>The last few steps of screwing the keyboard case together and pressing on the keycaps were all pretty trivial, although I did find I had to apply more force than I expected to get the keycaps on.</p>
 <h2>Complete</h2>
-<p>This project taught me a lot about electronics especially soldering and microcontroller firmware, but more importantly it has given me a lot more confidence to try some more hardware projects.</p>
-<p>It is all stuff that can be learned.</p>
+<p>This project taught me a lot about electronics especially soldering and microcontroller firmware, but more importantly it has given me a lot more confidence to try some more hardware projects. It is all stuff that can be learned.</p>
+<p>I was also happy with the mind hack I did to myself. Many of my projects end up unfinished mostly due to me losing interest or getting paralysed with things I don’t know. Choosing a project with less time between challenge and reward was a big reason it was completed.</p>
 <p><img src="./posts/12-building-a-keyboard/06-complete.jpg" alt="Complete"></p>
 
