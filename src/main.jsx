@@ -1,5 +1,6 @@
 require('highlight.js/styles/github.css');
 require('./main.scss');
+require('whatwg-fetch');
 
 import $ from 'jquery';
 import Journal from './journal.jsx';
@@ -61,13 +62,9 @@ ReactDOM.render((
 ), document.getElementById('content'));
 
 function getPosts() {
-  return $.get('./model.json').then((model) => {
+  return fetch('./model.json').then(r => r.json()).then((model) => {
     const postPromises = model.posts.map((post) => {
-      return $.ajax({
-        url: `./posts/${post.id}.html`,
-        dataType: 'text',
-        cache: false
-      }).then(function(content) {
+      return fetch(`./posts/${post.id}.html`).then(r => r.text()).then(function(content) {
         post.content = content;
         const node = $('<div>').html(content);
         post.published = node.find('meta[name="published"]').attr('content');
@@ -82,8 +79,8 @@ function getPosts() {
         return post;
       });
     })
-    return $.when(...postPromises).then((...args) => {
-      args.sort(function (a, b) {
+    return Promise.all(postPromises).then((posts) => {
+      posts.sort(function (a, b) {
         if (a.published === b.published) {
           return 0;
         }
@@ -95,7 +92,7 @@ function getPosts() {
         }
         return 0;
       });
-      return args.reverse();
+      return posts.reverse();
     });
   });
 }
