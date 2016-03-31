@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { asciimate } from './asciimation';
 import { pushPath } from 'redux-simple-router';
-import $ from 'jquery';
 import { Link } from 'react-router';
 
 function findPost(posts, id) {
@@ -40,7 +39,7 @@ const Paging = React.createClass({
 const Post = React.createClass({
   componentDidUpdate: function() {
     const node = ReactDOM.findDOMNode(this);
-    $('.asciimate', node).each((i, e) => {
+    Array.prototype.forEach.call(node.querySelectorAll('.asciimate'), (e) => {
       asciimate(e);
     });
   },
