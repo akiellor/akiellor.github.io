@@ -144,92 +144,9 @@
 	  )
 	), document.getElementById('content'));
 
-	function query(selector) {
-	  return function (node) {
-	    return Array.prototype.slice.call(node.querySelectorAll(selector));
-	  };
-	}
-
-	function pipeline() {
-	  for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
-	    fns[_key] = arguments[_key];
-	  }
-
-	  return function (arg) {
-	    return fns.reduce(function (memo, fn) {
-	      return fn(memo);
-	    }, arg);
-	  };
-	}
-
-	var prop = function prop(name) {
-	  return function (object) {
-	    return object && object[name];
-	  };
-	};
-
-	var nth = prop;
-
-	var published = pipeline(query('meta[name="published"]'), nth(0), prop('attributes'), prop('content'), prop('value'));
-
-	var mapWith = function mapWith(fn) {
-	  return function (arr) {
-	    return arr.map(fn);
-	  };
-	};
-
-	var filterWith = function filterWith(fn) {
-	  return function (arr) {
-	    return arr.filter(fn);
-	  };
-	};
-
-	var tags = pipeline(query('meta[name="tags"]'), nth(0), prop('attributes'), prop('content'), prop('value'), function (str) {
-	  return str ? str.split(',') : [];
-	}, mapWith(function (s) {
-	  return s.trim();
-	}), filterWith(function (s) {
-	  return s.length !== 0;
-	}));
-
-	var title = pipeline(query('h1'), nth(0), prop('textContent'));
-
-	var synopsis = pipeline(query('p'), nth(0), prop('textContent'));
-
 	function getPosts() {
 	  return fetch('./model.json').then(function (r) {
 	    return r.json();
-	  }).then(function (model) {
-	    var postPromises = model.posts.map(function (post) {
-	      return fetch('./posts/' + post.id + '.html').then(function (r) {
-	        return r.text();
-	      }).then(function (content) {
-	        post.content = content;
-	        var node = document.createElement('div');
-	        node.innerHTML = content;
-	        post.published = published(node);
-	        post.draft = !post.published;
-	        post.tags = tags(node);
-	        post.title = title(node);
-	        post.synopsis = synopsis(node);
-	        return post;
-	      });
-	    });
-	    return Promise.all(postPromises).then(function (posts) {
-	      posts.sort(function (a, b) {
-	        if (a.published === b.published) {
-	          return 0;
-	        }
-	        if (b.published === undefined || a.published > b.published) {
-	          return 1;
-	        }
-	        if (a.published === undefined || a.published < b.published) {
-	          return -1;
-	        }
-	        return 0;
-	      });
-	      return posts.reverse();
-	    });
 	  });
 	}
 
