@@ -2,7 +2,6 @@ require('highlight.js/styles/github.css');
 require('./main.scss');
 require('whatwg-fetch');
 
-import $ from 'jquery';
 import Journal from './journal.jsx';
 import About from './about.jsx';
 import Header from './header.jsx';
@@ -61,21 +60,71 @@ ReactDOM.render((
   </Provider>
 ), document.getElementById('content'));
 
+function query(selector) {
+  return function(node) {
+    return Array.prototype.slice.call(node.querySelectorAll(selector));
+  }
+}
+
+function pipeline(...fns) {
+  return function(arg) {
+    return fns.reduce(function(memo, fn) {
+      return fn(memo);
+    }, arg);
+  };
+}
+
+const prop = (name) => (object) => object && object[name];
+
+const nth = prop;
+
+const published = pipeline(
+  query('meta[name="published"]'),
+  nth(0),
+  prop('attributes'),
+  prop('content'),
+  prop('value'),
+);
+
+const mapWith = (fn) => (arr) => arr.map(fn);
+
+const filterWith = (fn) => (arr) => arr.filter(fn);
+
+const tags = pipeline(
+  query('meta[name="tags"]'),
+  nth(0),
+  prop('attributes'),
+  prop('content'),
+  prop('value'),
+  (str) => str ? str.split(',') : [],
+  mapWith(s => s.trim()),
+  filterWith(s => s.length !== 0)
+);
+
+const title = pipeline(
+  query('h1'),
+  nth(0),
+  prop('textContent')
+)
+
+const synopsis = pipeline(
+  query('p'),
+  nth(0),
+  prop('textContent')
+)
+
 function getPosts() {
   return fetch('./model.json').then(r => r.json()).then((model) => {
     const postPromises = model.posts.map((post) => {
       return fetch(`./posts/${post.id}.html`).then(r => r.text()).then(function(content) {
         post.content = content;
-        const node = $('<div>').html(content);
-        post.published = node.find('meta[name="published"]').attr('content');
+        const node = document.createElement('div');
+        node.innerHTML = content;
+        post.published = published(node);
         post.draft = !post.published;
-        post.tags = (node.find('meta[name="tags"]').attr('content') || "").split(',').map(function(t) {
-          return t.trim();
-        }).filter(function(t) {
-          return t.length !== 0;
-        });
-        post.title = node.find('h1').text();
-        post.synopsis = node.find('p:first').text();
+        post.tags = tags(node);
+        post.title = title(node);
+        post.synopsis = synopsis(node);
         return post;
       });
     })
