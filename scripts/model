@@ -1,12 +1,84 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --harmony
 
+var cheerio = require('cheerio');
 var basename = require('path').basename;
 
+function query(selector) {
+  return function(node) {
+    return node(selector);
+  }
+}
+
+function pipeline(...fns) {
+  return function(arg) {
+    return fns.reduce(function(memo, fn) {
+      return fn(memo);
+    }, arg);
+  };
+}
+
+const attr = (name) => (node) => node && node.attr(name);
+
+const text = (node) => node.text();
+
+const first = (node) => node.first();
+
+const published = pipeline(
+  query('meta[name="published"]'),
+  attr('content')
+);
+
+const mapWith = (fn) => (arr) => arr.map(fn);
+
+const filterWith = (fn) => (arr) => arr.filter(fn);
+
+const tags = pipeline(
+  query('meta[name="tags"]'),
+  attr('content'),
+  (str) => str ? str.split(',') : [],
+  mapWith(s => s.trim()),
+  filterWith(s => s.length !== 0)
+);
+
+const title = pipeline(
+  query('h1'),
+  first,
+  text
+)
+
+const synopsis = pipeline(
+  query('p'),
+  first,
+  text
+)
+
+const not = (fn) => (arg) => !fn(arg);
+
 var posts = process.argv.slice(2).map(function(p) {
-  return {id: basename(p, '.html')};
+  var content = require('fs').readFileSync(p).toString();
+  var node = cheerio.load(content);
+  return {
+    id: basename(p, '.html'),
+    content: content,
+    published: published(node),
+    draft: not(published)(node),
+    tags: tags(node),
+    title: title(node),
+    synopsis: synopsis(node)
+  };
 });
 
+posts.sort(function (a, b) {
+  if (a.published === b.published) {
+    return 0;
+  }
+  if (b.published === undefined || a.published > b.published) {
+    return 1;
+  }
+  if (a.published === undefined || a.published < b.published) {
+    return -1;
+  }
+  return 0;
+});
 
-console.log(JSON.stringify({
-  posts: posts
-}));
+console.log(JSON.stringify(posts.reverse()));
