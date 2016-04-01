@@ -29,7 +29,7 @@ Since I had decided not to apply the finish to the keyboard, I jumped straight i
 
 ## Microcontroller
 
-The Atreus Keyboard uses a A-Star microcontroller to handle all the switch signals. Soldering it to the board was a little more tricky than the diodes as the contact points were much closer together and any slag could break the keyboard or make it behave unpredictably. I took a lot of time here, but maybe should not have, as I ended up scorching the microcontroller in a few places.
+The Atreus Keyboard uses a A-Star microcontroller to handle all the switch signals. Soldering it to the board was a little more tricky than the diodes as the contact points were much closer together and any slag could break the keyboard or make it behave unpredictably. I ended up scorching the board a little as I got nervous and took too long getting a good join.
 
 ![Microcontroller](./posts/12-building-a-keyboard/03-microcontroller.jpg)
 
